@@ -17,6 +17,7 @@ public class Person {
 
     @Id
     private String personId;
+    private List<Company> companies;
     private String userName;
     private String firstName;
     private String lastName;
