@@ -1,6 +1,6 @@
-package de.neuefische.backend.collection;
+package de.neuefische.backend.model;
 
-import io.netty.resolver.AddressResolver;
+import de.neuefische.backend.model.Address;
 import lombok.Builder;
 import lombok.Data;
 

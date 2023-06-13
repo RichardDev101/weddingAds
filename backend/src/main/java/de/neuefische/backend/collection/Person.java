@@ -2,6 +2,9 @@ package de.neuefische.backend.collection;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import de.neuefische.backend.enums.LoginRole;
+import de.neuefische.backend.model.Address;
+import de.neuefische.backend.model.Company;
+import de.neuefische.backend.model.ContactDetail;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -21,8 +24,7 @@ public class Person {
     private String userName;
     private String firstName;
     private String lastName;
-    private String  email;
-    private String phoneNumber;
+    private List<ContactDetail> contactDetails;
     private List<Address> addresses;
     private List<LoginRole> roles;
     private String gpsData;
