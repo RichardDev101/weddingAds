@@ -1,10 +1,9 @@
 package de.neuefische.backend.controller;
 
-import de.neuefische.backend.model.Photo;
+import de.neuefische.backend.collection.Photo;
 import de.neuefische.backend.service.PhotoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

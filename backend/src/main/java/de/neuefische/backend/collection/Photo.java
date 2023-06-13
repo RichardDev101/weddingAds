@@ -1,4 +1,4 @@
-package de.neuefische.backend.model;
+package de.neuefische.backend.collection;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
