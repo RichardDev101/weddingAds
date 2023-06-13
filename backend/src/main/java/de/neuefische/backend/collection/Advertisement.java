@@ -8,6 +8,7 @@ import de.neuefische.backend.enums.PriceCategory;
 import de.neuefische.backend.model.Address;
 import de.neuefische.backend.model.ContactDetail;
 import lombok.Builder;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Advertisement {
 
+    @Id
     private String id;
     private AdvertisementStatus advertisementStatus;
     private PaymentCategory paymentCategory;
@@ -24,8 +26,7 @@ public class Advertisement {
     private List<Photo> photos;
     private String about; // Section where one writes about himself in a shot manner
     private String detail; //Description about the Service someone ist offering
-    private float minPricing;
-    private float maxPricing;
+    private float averagePrice;
     private List<PriceCategory> priceCategories;
     private List<ContactDetail> contacts;
     private List<Address> location;

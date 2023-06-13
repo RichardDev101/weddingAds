@@ -20,7 +20,6 @@ public class Person {
 
     @Id
     private String personId;
-    private List<Company> companies;
     private String userName;
     private String firstName;
     private String lastName;
@@ -28,4 +27,5 @@ public class Person {
     private List<Address> addresses;
     private List<LoginRole> roles;
     private String gpsData;
+
 }
