@@ -10,4 +10,8 @@ public interface PersonService {
     List<Person> getPersonStartWith(String name);
 
     void delete(String id);
+
+    String update(Person person, String id);
+
+    Person gerPersonWith(String id);
 }

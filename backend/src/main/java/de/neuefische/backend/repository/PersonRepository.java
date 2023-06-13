@@ -10,4 +10,8 @@ import java.util.List;
 public interface PersonRepository extends MongoRepository<Person, String> {
 
     public List<Person> findByFirstNameStartsWith(String Name);
+
+    public Person findByPersonId(String id);
+
+
 }
