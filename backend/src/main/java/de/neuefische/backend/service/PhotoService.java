@@ -9,4 +9,6 @@ public interface PhotoService {
     String addPhoto(String originalFilename, MultipartFile image) throws IOException;
 
     Photo getPhoto(String id);
+
+    void deletePhoto(String id);
 }

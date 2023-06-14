@@ -10,7 +10,7 @@ public enum BusinessCategory {
     BRIDAL_SALON("Bridal Salon"),
     DECOR_LIGHTNING("Decor & Lightning"),
     DJ("DJ"),
-    MUSICANS("Musicans"),
+    MUSICIAN("Musician"),
     FLORIST("Florist"),
     JEWELER("Jeweler"),
     CEREMONY_VENUE("Ceremony venue"),
