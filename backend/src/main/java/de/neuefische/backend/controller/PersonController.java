@@ -16,6 +16,7 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    //CREATE
     @PostMapping
     public String save(@RequestBody Person person){
         return personService.save(person);
@@ -26,7 +27,7 @@ public class PersonController {
     }
     @GetMapping("{id}")
     public Person getPersonWith(@RequestParam String id){
-        return personService.gerPersonWith(id);
+        return personService.getPersonWith(id);
     }
     @DeleteMapping("{id}")
     public void delete(@PathVariable String id){

@@ -25,7 +25,7 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findByFirstNameStartsWith(name);
     }
     @Override
-    public Person gerPersonWith(String id) {
+    public Person getPersonWith(String id) {
         return personRepository.findByPersonId(id);
     }
 

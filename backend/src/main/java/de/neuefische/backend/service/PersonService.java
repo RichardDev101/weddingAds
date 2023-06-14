@@ -13,5 +13,5 @@ public interface PersonService {
 
     String update(Person person, String id);
 
-    Person gerPersonWith(String id);
+    Person getPersonWith(String id);
 }
