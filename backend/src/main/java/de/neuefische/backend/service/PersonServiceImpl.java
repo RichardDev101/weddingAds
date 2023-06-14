@@ -5,8 +5,6 @@ import de.neuefische.backend.enums.LoginRole;
 import de.neuefische.backend.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,10 +12,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Autowired
     private PersonRepository personRepository;
-
     @Autowired
     private GenerateUUID uuid;
-
 
     @Override
     public String saveAdmin(Person person) {
@@ -40,11 +36,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public List<Person> getPersonByRole(LoginRole role) {
+    public List<Person> getPersonsByRole(LoginRole role) {
         return personRepository.findByLoginRoleIs(role);
     }
     @Override
-    public List<Person> getPersonStartWithName(String name) {
+    public List<Person> getPersonsStartWithName(String name) {
         return personRepository.findByFirstNameStartsWithOrLastNameStartingWith(name);
     }
     @Override

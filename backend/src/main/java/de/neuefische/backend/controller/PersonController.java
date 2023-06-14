@@ -8,11 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/api/person")
 public class PersonController {
 
     @Autowired
@@ -22,11 +21,11 @@ public class PersonController {
     //CREATE
     @PostMapping("/master-admin")
     public ResponseEntity<String> checkAndCreateMasterAdmin(){
-        List<Person> personList = getPersonByRole(LoginRole.ADMIN);
+        List<Person> personList = getPersonsByRole(LoginRole.ADMIN);
         if(personList!=null) {
             for (int i=0; i<personList.size(); i++){
                 if(personList.get(i).getUserName()=="${ENV_UN_Admin}"){
-                    return ResponseEntity.ok("MasterAdmin already exists");
+                    return ResponseEntity.ok("MasterAdmin already exists.");
                 }
             }
         }
@@ -34,7 +33,7 @@ public class PersonController {
         person.setUserName("${ENV_UN_Admin}");
         person.setPassWord("${ENV_PW_Admin}");
         saveAdmin(person);
-        return ResponseEntity.status(HttpStatus.CREATED).body("MasterAdmin created successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body("MasterAdmin has been successfully created.");
     }
     @PostMapping("/admin")
     //@PreAuthorize("hasAuthority('LoginRole=ADMIN')")
@@ -51,32 +50,29 @@ public class PersonController {
     public String saveUser(@RequestBody Person person){
         return personService.saveUser(person);
     }
-
     //READ
     @GetMapping
-    public List<Person> getPersonByRole(@RequestParam("role") LoginRole role){
-        return personService.getPersonByRole(role);
+    public List<Person> getPersonsByRole(@RequestParam("role") LoginRole role){
+        return personService.getPersonsByRole(role);
     }
     @GetMapping
-    public List<Person> getPersonStartWithName(@RequestParam("name") String name){
-        return personService.getPersonStartWithName(name);
+    public List<Person> getPersonsStartWithName(@RequestParam("name") String name){
+        return personService.getPersonsStartWithName(name);
     }
     @GetMapping("{id}")
     public Person getPersonWithId(@PathVariable String id){
         return personService.getPersonWithId(id);
     }
-
     //UPDATE
     @PutMapping
     public String update(@RequestBody Person person, @RequestParam String id){
         if(!person.getPersonId().equals(id)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID for person does not match the requirements.");
         } else if (getPersonWithId(id)==null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID is not part of the database");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID is not part of the database.");
         }
         return personService.update(person, id);
     }
-
     //DELETE
     @DeleteMapping("{id}")
     public void delete(@PathVariable String id){

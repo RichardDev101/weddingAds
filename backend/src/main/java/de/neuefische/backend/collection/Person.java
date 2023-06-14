@@ -3,7 +3,6 @@ package de.neuefische.backend.collection;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import de.neuefische.backend.enums.LoginRole;
 import de.neuefische.backend.model.Address;
-import de.neuefische.backend.model.Company;
 import de.neuefische.backend.model.ContactDetail;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor

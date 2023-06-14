@@ -1,6 +1,5 @@
 package de.neuefische.backend.model;
 
-import de.neuefische.backend.model.Address;
 import lombok.Builder;
 import lombok.Data;
 
