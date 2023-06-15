@@ -28,7 +28,7 @@ public class VendorController {
     public List<Vendor> getAllVendors(){
         return vendorService.getAllVendors();
     }
-    @GetMapping
+    @GetMapping("/name")
     public List<Vendor> getVendorStartWithName(@RequestParam("name") String name){
         return vendorService.getVendorStartWithName(name);
     }

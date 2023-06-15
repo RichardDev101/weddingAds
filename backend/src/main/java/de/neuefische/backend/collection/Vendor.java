@@ -7,7 +7,7 @@ import lombok.Builder;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
-@Builder
+@Builder(builderMethodName = "vendorBuilder")
 @Document(collection="vendor")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Vendor extends Person{

@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
+@Builder(builderMethodName = "personBuilder")
 @Document(collection="person")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Person {

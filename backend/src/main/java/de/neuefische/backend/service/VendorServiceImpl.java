@@ -28,20 +28,19 @@ public class VendorServiceImpl implements VendorService{
        return vendorRepository.findAll();
     }
     @Override
-    public List<Vendor> getVendorStartWithName(String name) {
-        return null;
+    public Vendor getVendorWithId(String id) {
+        return vendorRepository.findVendorByPersonId(id);
     }
     @Override
-    public Vendor getVendorWithId(String id) {
-        return null;
+    public List<Vendor> getVendorStartWithName(String name) {
+        return vendorRepository.findByFirstNameStartsWithOrLastNameStartsWith(name);
     }
     @Override
     public String updateVendor(Vendor vendor, String id) {
-        return null;
+        return vendorRepository.save(vendor).getPersonId();
     }
     @Override
     public void deleteVendor(String id) {
-
+        vendorRepository.deleteById(id);
     }
-
 }

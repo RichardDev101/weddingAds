@@ -50,12 +50,13 @@ public class PersonController {
     public String saveUser(@RequestBody Person person){
         return personService.saveUser(person);
     }
+
     //READ
-    @GetMapping
+    @GetMapping("/role")
     public List<Person> getPersonsByRole(@RequestParam("role") LoginRole role){
         return personService.getPersonsByRole(role);
     }
-    @GetMapping
+    @GetMapping("/name")
     public List<Person> getPersonsStartWithName(@RequestParam("name") String name){
         return personService.getPersonsStartWithName(name);
     }
@@ -63,6 +64,7 @@ public class PersonController {
     public Person getPersonWithId(@PathVariable String id){
         return personService.getPersonWithId(id);
     }
+
     //UPDATE
     @PutMapping
     public String update(@RequestBody Person person, @RequestParam String id){
