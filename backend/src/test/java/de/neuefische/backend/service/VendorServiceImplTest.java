@@ -4,8 +4,6 @@ import de.neuefische.backend.collection.Vendor;
 import de.neuefische.backend.enums.LoginRole;
 import de.neuefische.backend.repository.VendorRepository;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;

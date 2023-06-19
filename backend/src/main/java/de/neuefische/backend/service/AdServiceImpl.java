@@ -6,7 +6,6 @@ import de.neuefische.backend.enums.PaymentCategory;
 import de.neuefische.backend.repository.AdRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

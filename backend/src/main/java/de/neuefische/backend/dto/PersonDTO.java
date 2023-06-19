@@ -3,9 +3,7 @@ package de.neuefische.backend.dto;
 import de.neuefische.backend.enums.LoginRole;
 import de.neuefische.backend.model.Address;
 import de.neuefische.backend.model.ContactDetail;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 

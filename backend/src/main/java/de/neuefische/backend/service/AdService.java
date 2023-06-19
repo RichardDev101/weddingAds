@@ -1,12 +1,8 @@
 package de.neuefische.backend.service;
 
 import de.neuefische.backend.collection.Advertisement;
-import de.neuefische.backend.collection.Person;
-import de.neuefische.backend.enums.AdvertisementStatus;
 import de.neuefische.backend.enums.BusinessCategory;
 import de.neuefische.backend.enums.PaymentCategory;
-import de.neuefische.backend.model.Address;
-import de.neuefische.backend.model.Company;
 
 import java.util.List;
 
