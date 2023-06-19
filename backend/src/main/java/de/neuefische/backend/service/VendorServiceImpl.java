@@ -3,12 +3,16 @@ package de.neuefische.backend.service;
 import de.neuefische.backend.collection.Vendor;
 import de.neuefische.backend.enums.LoginRole;
 import de.neuefische.backend.repository.VendorRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Service
 public class VendorServiceImpl implements VendorService{
 

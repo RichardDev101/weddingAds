@@ -39,7 +39,7 @@ class PersonServiceImplTest {
         assertEquals(person, result);
     }
     @Test
-    void saveEditor() {
+    void testSaveEditor_ShouldSaveUserAndReturnSavedEditor(){
         // ARRANGE
         Person person = new Person();
         person.setLoginRole(LoginRole.EDITOR);
@@ -61,7 +61,7 @@ class PersonServiceImplTest {
     }
 
     @Test
-    void saveUser() {
+    void testSaveUser_ShouldSaveUserAndReturnSavedUser()  {
         // ARRANGE
         Person person = new Person();
         person.setLoginRole(LoginRole.USER);
