@@ -1,17 +1,11 @@
 package de.neuefische.backend.controller;
 
+import de.neuefische.backend.dto.AdvertisementDTO;
 import de.neuefische.backend.collection.Advertisement;
-import de.neuefische.backend.collection.Person;
-import de.neuefische.backend.enums.BusinessCategory;
-import de.neuefische.backend.enums.LoginRole;
-import de.neuefische.backend.enums.PaymentCategory;
-import de.neuefische.backend.model.Address;
-import de.neuefische.backend.model.Company;
+import de.neuefische.backend.enums.*;
 import de.neuefische.backend.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,11 +19,30 @@ public class AdController {
     //CREATE
     @PostMapping()
     //@PreAuthorize("hasAuthority('LoginRole=ADMIN')")
-    public Advertisement save(@RequestBody Advertisement advertisement){
-        return adService.save(advertisement);
+    public Advertisement save(@RequestBody AdvertisementDTO ad){
+        Advertisement newAd =Advertisement.builder()
+                .advertisementStatus(ad.getAdvertisementStatus())
+                .paymentCategory(ad.getPaymentCategory())
+                .company(ad.getCompany())
+                .businessCategories(ad.getBusinessCategories())
+                .photosID(ad.getPhotosID())
+                .title(ad.getTitle())
+                .aboutYourself(ad.getAboutYourself())
+                .detailInformationForService(ad.getDetailInformationForService())
+                .averagePrice(ad.getAveragePrice())
+                .priceCategories(ad.getPriceCategories())
+                .contacts(ad.getContacts())
+                .locations(ad.getLocations())
+                .personsID(ad.getPersonsID())
+                .build();
+        return adService.save(newAd);
     }
 
     //READ
+    @GetMapping()
+    public List<Advertisement> getAllAds(){
+        return adService.getAllAds();
+    }
     @GetMapping("{id}")
     public Advertisement getAdWithId(@PathVariable String id){
         return adService.getAdWithId(id);
@@ -42,27 +55,30 @@ public class AdController {
     public List<Advertisement> getAdsByPaymentCategory(@RequestParam("paymentCategory") PaymentCategory paymentCategory){
         return adService.getAdsByPaymentCategory(paymentCategory);
     }
-    @GetMapping("/company")
-    public List<Advertisement> getAdsByCompany(@RequestParam("companyName") String companyName){
-        return adService.getAdsByCompany(companyName);
-    }
     @GetMapping("/average-price")
-    public List<Advertisement> getAdsByAveragePrice(@RequestParam("averagePrice") float averagePrice){
-        return adService.getAdsByAveragePrice(averagePrice);
-    }
-    @GetMapping("/location")
-    public List<Advertisement> getAdsByLocation(@RequestParam("location") Address address){
-        return adService.getAdsByLocation(address);
+    public List<Advertisement> getAdsByAveragePriceIsLessOrEqual(@RequestParam("averagePrice") float averagePrice){
+        return adService.getAdsByAveragePriceIsLessOrEqual(averagePrice);
     }
     //UPDATE
-    @PutMapping
-    public String update(@RequestBody Advertisement advertisement, @RequestParam String id){
-        if(!advertisement.getId().equals(id)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID for advertisement does not match the requirements.");
-        } else if (getAdWithId(id)==null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID is not part of the database.");
-        }
-        return adService.update(advertisement, id);
+    @PutMapping("{id}")
+    public String update(@RequestBody AdvertisementDTO ad, @PathVariable String id){
+        Advertisement updateAd = Advertisement.builder()
+                .id(id)
+                .advertisementStatus(ad.getAdvertisementStatus())
+                .paymentCategory(ad.getPaymentCategory())
+                .company(ad.getCompany())
+                .businessCategories(ad.getBusinessCategories())
+                .photosID(ad.getPhotosID())
+                .title(ad.getTitle())
+                .aboutYourself(ad.getAboutYourself())
+                .detailInformationForService(ad.getDetailInformationForService())
+                .averagePrice(ad.getAveragePrice())
+                .priceCategories(ad.getPriceCategories())
+                .contacts(ad.getContacts())
+                .locations(ad.getLocations())
+                .personsID(ad.getPersonsID())
+                .build();
+        return adService.updateAd(updateAd, id);
     }
     //DELETE
     @DeleteMapping("{id}")

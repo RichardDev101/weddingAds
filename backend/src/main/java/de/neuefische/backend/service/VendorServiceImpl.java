@@ -32,10 +32,6 @@ public class VendorServiceImpl implements VendorService{
         return vendorRepository.findVendorByPersonId(id);
     }
     @Override
-    public List<Vendor> getVendorStartWithName(String name) {
-        return vendorRepository.findByFirstNameStartsWithOrLastNameStartsWith(name);
-    }
-    @Override
     public String updateVendor(Vendor vendor, String id) {
         return vendorRepository.save(vendor).getPersonId();
     }

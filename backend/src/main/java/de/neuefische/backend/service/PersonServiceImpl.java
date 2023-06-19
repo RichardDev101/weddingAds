@@ -1,5 +1,6 @@
 package de.neuefische.backend.service;
 
+import de.neuefische.backend.collection.Advertisement;
 import de.neuefische.backend.collection.Person;
 import de.neuefische.backend.enums.LoginRole;
 import de.neuefische.backend.repository.PersonRepository;
@@ -36,15 +37,17 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public List<Person> getAllPersons() {
+        return personRepository.findAll();
+    }
+
+    @Override
     public List<Person> getPersonsByRole(LoginRole role) {
         return personRepository.findByLoginRoleIs(role);
     }
+
     @Override
-    public List<Person> getPersonsStartWithName(String name) {
-        return personRepository.findByFirstNameStartsWithOrLastNameStartsWith(name);
-    }
-    @Override
-    public Person getPersonWithId(String id) {
+    public Person getPersonById(String id) {
         return personRepository.findByPersonId(id);
     }
 
@@ -52,6 +55,7 @@ public class PersonServiceImpl implements PersonService {
     public void delete(String id) {
         personRepository.deleteById(id);
     }
+
     @Override
     public String update(Person person, String id) {
         return personRepository.save(person).getPersonId();

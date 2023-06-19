@@ -28,10 +28,6 @@ public class VendorController {
     public List<Vendor> getAllVendors(){
         return vendorService.getAllVendors();
     }
-    @GetMapping("/name")
-    public List<Vendor> getVendorStartWithName(@RequestParam("name") String name){
-        return vendorService.getVendorStartWithName(name);
-    }
     @GetMapping("{id}")
     public Vendor getVendorWithId(@PathVariable String id){
         return vendorService.getVendorWithId(id);

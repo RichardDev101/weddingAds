@@ -8,7 +8,6 @@ import java.util.List;
 public interface VendorService {
     String saveVendor(Vendor vendor);
     List<Vendor> getAllVendors();
-    List<Vendor> getVendorStartWithName(String name);
     Vendor getVendorWithId(String id);
     String updateVendor(Vendor vendor, String id);
     void deleteVendor(String id);

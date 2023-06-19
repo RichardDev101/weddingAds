@@ -8,11 +8,7 @@ import java.util.List;
 
 @Repository
 public interface PersonRepository extends MongoRepository<Person, String> {
-
-    public List<Person> findByFirstNameStartsWithOrLastNameStartsWith(String Name);
-
     public List<Person> findByLoginRoleIs(LoginRole role);
-
     public Person findByPersonId(String id);
 
 

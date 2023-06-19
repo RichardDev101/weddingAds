@@ -1,12 +1,16 @@
 package de.neuefische.backend.collection;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import de.neuefische.backend.enums.BusinessCategory;
-import de.neuefische.backend.model.Company;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Builder(builderMethodName = "vendorBuilder")
 @Document(collection="vendor")
 @JsonInclude(JsonInclude.Include.NON_NULL)

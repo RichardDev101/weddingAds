@@ -4,15 +4,16 @@ import de.neuefische.backend.collection.Advertisement;
 import de.neuefische.backend.enums.BusinessCategory;
 import de.neuefische.backend.enums.PaymentCategory;
 import de.neuefische.backend.model.Address;
-import de.neuefische.backend.model.Company;
 import de.neuefische.backend.repository.AdRepository;
-import de.neuefische.backend.repository.PersonRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
+@RequiredArgsConstructor
 public class AdServiceImpl implements AdService{
 
     @Autowired
@@ -25,9 +26,14 @@ public class AdServiceImpl implements AdService{
         advertisement.setId(uuid.getUUID());
         return adRepository.save(advertisement);
     }
+
+    @Override
+    public List<Advertisement> getAllAds() {
+        return adRepository.findAll();
+    }
     @Override
     public Advertisement getAdWithId(String id) {
-        return adRepository.findAdvertisementById(id);
+        return adRepository.findById(id).orElseThrow(()->new NoSuchElementException("ID: " +id+ " is not part of the database."));
     }
     @Override
     public List<Advertisement> getAdByBusiness(BusinessCategory businessCategory) {
@@ -38,23 +44,17 @@ public class AdServiceImpl implements AdService{
         return adRepository.findAdvertisementsByPaymentCategory(paymentCategory);
     }
     @Override
-    public List<Advertisement> getAdsByCompany(String companyName) {
-        return adRepository.findAdvertisementsByCompanyContains(companyName);
+    public List<Advertisement> getAdsByAveragePriceIsLessOrEqual(float averagePrice) {
+        return adRepository.findAdvertisementsByAveragePriceIsLessThanEqual(averagePrice);
     }
     @Override
-    public List<Advertisement> getAdsByAveragePrice(float averagePrice) {
-        return adRepository.findAdvertisementsByAveragePrice(averagePrice);
-    }
-    @Override
-    public List<Advertisement> getAdsByLocation(Address address) {
-        return adRepository.findAdvertisementsByLocationsContains(address);
-    }
-    @Override
-    public String update(Advertisement advertisement, String id) {
+    public String updateAd(Advertisement advertisement, String id) {
+        adRepository.findById(id).orElseThrow(()->new NoSuchElementException("ID: " +id+ " is not part of the database."));
         return adRepository.save(advertisement).getId();
     }
     @Override
     public void delete(String id) {
         adRepository.deleteById(id);
     }
+
 }
