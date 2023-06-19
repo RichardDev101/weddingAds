@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Service
@@ -30,7 +33,12 @@ public class PhotoServiceImpl implements PhotoService{
     }
     @Override
     public Photo getPhoto(String id) {
-        return photoRepository.findById(id).get();
+        Optional<Photo> optionalPhoto = photoRepository.findById(id);
+        if (optionalPhoto.isPresent()) {
+            return optionalPhoto.get();
+        } else {
+            throw new NoSuchElementException("Photo with ID: " + id + " not found.");
+        }
     }
     @Override
     public void deletePhoto(String id) {
