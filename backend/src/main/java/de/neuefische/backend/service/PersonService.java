@@ -6,13 +6,13 @@ import de.neuefische.backend.enums.LoginRole;
 import java.util.List;
 
 public interface PersonService {
-    String saveUser(Person person);
-    String saveAdmin(Person person);
-    String saveEditor(Person person);
+    Person saveUser(Person person);
+    Person saveAdmin(Person person);
+    Person saveEditor(Person person);
     List<Person> getAllPersons();
     Person getPersonById(String id);
     List<Person> getPersonsByRole(LoginRole role);
-    String update(Person person, String id);
+    Person update(Person person, String id);
     void delete(String id);
 
 }

@@ -49,11 +49,12 @@ public class AdServiceImpl implements AdService{
     }
     @Override
     public String updateAd(Advertisement advertisement, String id) {
-        adRepository.findById(id).orElseThrow(()->new NoSuchElementException("ID: " +id+ " is not part of the database."));
+        adRepository.findById(id).orElseThrow(()->new NoSuchElementException("Ad-ID: " +id+ " is not part of the database."));
         return adRepository.save(advertisement).getId();
     }
     @Override
     public void delete(String id) {
+        adRepository.findById(id).orElseThrow(()->new NoSuchElementException("Ad-ID: " +id+ " is not part of the database."));
         adRepository.deleteById(id);
     }
 

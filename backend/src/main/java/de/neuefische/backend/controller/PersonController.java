@@ -13,14 +13,14 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/person")
+@RequestMapping("/api")
 public class PersonController {
 
     @Autowired
     private PersonService personService;
 
     //CREATE
-    @PostMapping("/master-admin")
+    @PostMapping("/person/master-admin")
     public ResponseEntity<String> checkAndCreateMasterAdmin(){
         List<Person> personList = getPersonsByRole(LoginRole.ADMIN);
         if(personList.size()!=0) {
@@ -37,9 +37,9 @@ public class PersonController {
         saveAdmin(masterAdmin);
         return ResponseEntity.status(HttpStatus.CREATED).body("MasterAdmin has been successfully created.");
     }
-    @PostMapping("/admin")
+    @PostMapping("/person/admin")
     //@PreAuthorize("hasAuthority('LoginRole=ADMIN')")
-    public String saveAdmin(@RequestBody PersonDTO person){
+    public Person saveAdmin(@RequestBody PersonDTO person){
         Person addAdmin = Person.personBuilder()
                 .userName(person.getUserName())
                 .passWord(person.getPassWord())
@@ -52,9 +52,9 @@ public class PersonController {
                 .build();
         return personService.saveAdmin(addAdmin);
     }
-    @PostMapping("/editor")
+    @PostMapping("/person/editor")
     //@PreAuthorize("hasAuthority('LoginRole=ADMIN')")
-    public String saveEditor(@RequestBody PersonDTO  person){
+    public Person saveEditor(@RequestBody PersonDTO  person){
         Person addEditor = Person.personBuilder()
                 .userName(person.getUserName())
                 .passWord(person.getPassWord())
@@ -67,9 +67,9 @@ public class PersonController {
                 .build();
         return personService.saveEditor(addEditor);
     }
-    @PostMapping("/user")
+    @PostMapping("/person/user")
     //@PreAuthorize("hasAuthority('LoginRole=ADMIN')")
-    public String saveUser(@RequestBody PersonDTO person){
+    public Person saveUser(@RequestBody PersonDTO person){
         Person addUser = Person.personBuilder()
                 .userName(person.getUserName())
                 .passWord(person.getPassWord())
@@ -84,28 +84,23 @@ public class PersonController {
     }
 
     //READ
-    @GetMapping("/all")
+    @GetMapping("/persons")
     public List<Person> getAllPersons(){
         return personService.getAllPersons();
     }
-    @GetMapping("/role")
+    @GetMapping("/persons/role")
     public List<Person> getPersonsByRole(@RequestParam("role") LoginRole role){
         return personService.getPersonsByRole(role);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/person/{id}")
     public Person getPersonById(@PathVariable String id){
         return personService.getPersonById(id);
     }
 
     //UPDATE
-    @PutMapping
-    public String update(@RequestBody PersonDTO person, @RequestParam String id){
-        if(!person.getPersonId().equals(id)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID for person does not match the requirements.");
-        } else if (getPersonById(id)==null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID is not part of the database.");
-        }
+    @PutMapping("/person/{id}")
+    public Person update(@RequestBody PersonDTO person, @PathVariable String id){
         Person updatePerson = Person.personBuilder()
                 .personId(id)
                 .userName(person.getUserName())
@@ -120,7 +115,7 @@ public class PersonController {
         return personService.update(updatePerson, id);
     }
     //DELETE
-    @DeleteMapping("{id}")
+    @DeleteMapping("/person/{id}")
     public void delete(@PathVariable String id){
         personService.delete(id);
     }

@@ -2,11 +2,13 @@ package de.neuefische.backend.service;
 
 import de.neuefische.backend.collection.Advertisement;
 import de.neuefische.backend.collection.Person;
+import de.neuefische.backend.dto.PersonDTO;
 import de.neuefische.backend.enums.LoginRole;
 import de.neuefische.backend.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -17,23 +19,23 @@ public class PersonServiceImpl implements PersonService {
     private GenerateUUID uuid;
 
     @Override
-    public String saveAdmin(Person person) {
+    public Person saveAdmin(Person person) {
         person.setPersonId(uuid.getUUID());
         person.setLoginRole(LoginRole.ADMIN);
-        return personRepository.save(person).getPersonId();
+        return personRepository.save(person);
     }
     @Override
-    public String saveEditor(Person person) {
+    public Person saveEditor(Person person) {
         person.setPersonId(uuid.getUUID());
         person.setLoginRole(LoginRole.EDITOR);
-        return personRepository.save(person).getPersonId();
+        return personRepository.save(person);
     }
 
     @Override
-    public String saveUser(Person person) {
+    public Person saveUser(Person person) {
         person.setPersonId(uuid.getUUID());
         person.setLoginRole(LoginRole.USER);
-        return personRepository.save(person).getPersonId();
+        return personRepository.save(person);
     }
 
     @Override
@@ -48,17 +50,19 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getPersonById(String id) {
-        return personRepository.findByPersonId(id);
+        return personRepository.findById(id).orElseThrow(()->new NoSuchElementException("Person-ID: " +id+ " is not part of the database."));
     }
 
     @Override
     public void delete(String id) {
+        personRepository.findById(id).orElseThrow(()->new NoSuchElementException("Person-ID: " +id+ " is not part of the database."));
         personRepository.deleteById(id);
     }
 
     @Override
-    public String update(Person person, String id) {
-        return personRepository.save(person).getPersonId();
+    public Person update(Person person, String id) {
+        personRepository.findById(id).orElseThrow(()->new NoSuchElementException("Person-ID: " +id+ " is not part of the database."));
+        return personRepository.save(person);
     }
 
 

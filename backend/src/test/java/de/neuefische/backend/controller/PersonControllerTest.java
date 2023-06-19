@@ -37,7 +37,7 @@ class PersonControllerTest {
                         .with(csrf()))
                 .andExpect(status().is(201));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/person/role")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/persons/role")
                 .param("role", LoginRole.ADMIN.toString()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
@@ -60,22 +60,21 @@ class PersonControllerTest {
                         .contentType("application/json")
                         .content("""
                              {
-                                "userName": "TesAdmin",
+                                "userName": "TestEditor",
                                 "passWord": "123",
                                 "firstName": "Test",
-                                "lastName": "Mueller",
-                                "loginRole": "ADMIN"
+                                "lastName": "Mueller"
                               }
                                 """)
                         .with(csrf()))
                 .andExpect(status().is(200));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/person"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/persons"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         [
                         {
-                                "userName": "TesAdmin",
+                                "userName": "TestEditor",
                                 "passWord": "123",
                                 "firstName": "Test",
                                 "lastName": "Mueller",
@@ -103,7 +102,7 @@ class PersonControllerTest {
                         .with(csrf()))
                 .andExpect(status().is(200));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/person/all"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/persons"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         [
@@ -136,7 +135,7 @@ class PersonControllerTest {
                         .with(csrf()))
                 .andExpect(status().is(200));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/person/all"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/persons"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         [
@@ -170,7 +169,7 @@ class PersonControllerTest {
                 .andExpect(status().is(200))
                 .andReturn();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/person/role")
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/persons/role")
                         .param("role", LoginRole.USER.toString()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
@@ -188,16 +187,17 @@ class PersonControllerTest {
     @DirtiesContext
     @WithMockUser
     void testGetPersonWithId() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/person/admin")
-                        .contentType(MediaType.APPLICATION_JSON)
+        MvcResult result= mockMvc.perform(MockMvcRequestBuilders.post("/api/person/admin")
+                        .contentType("application/json")
                         .content("""
-                                                                {
-                                "userName": "TestUser",
+                             {
+                                "userName": "TestEditor",
                                 "passWord": "123",
                                 "firstName": "Test",
                                 "lastName": "Mueller"
                               }
-                                """).with(csrf()))
+                                """)
+                        .with(csrf()))
                 .andExpect(status().is(200))
                 .andReturn();
 
@@ -207,71 +207,100 @@ class PersonControllerTest {
         objectMapper.registerModule(new JavaTimeModule());
         Person addedPerson = objectMapper.readValue(content, Person.class);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/person/" + addedPerson.getPersonId()))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/person/"+addedPerson.getPersonId()))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
-                                                        {
-                                "userName": "TestUser",
+                        {
+                                "userName": "TestEditor",
                                 "passWord": "123",
                                 "firstName": "Test",
-                                "lastName": "Mueller"
+                                "lastName": "Mueller",
+                                "loginRole": "ADMIN"
                               }
-                                                """)).andExpect(jsonPath("$.personId").value(addedPerson.getPersonId()));
+                        """))
+                .andExpect(jsonPath("$.personId").value(addedPerson.getPersonId()));
     }
 
     @Test
     @DirtiesContext
     @WithMockUser
     void testUpdate() throws Exception {
-            MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/person/admin")
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content("""
-                              {
-                                "userName": "TestUser",
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/person/admin")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                "userName": "TestAdmin",
                                 "passWord": "123",
                                 "firstName": "Test",
                                 "lastName": "Mueller"
                               }
                                 """)
-                            .with(csrf()))
-                    .andExpect(status().isOk())
-                    .andReturn();
+                        .with(csrf()))
+                .andExpect(status().isOk())
+                .andReturn();
 
-            String content = result.getResponse().getContentAsString();
+        String content = result.getResponse().getContentAsString();
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.registerModule(new JavaTimeModule());
-            Person addedPerson = objectMapper.readValue(content, Person.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        Person addedPerson = objectMapper.readValue(content, Person.class);
 
-            mockMvc.perform(MockMvcRequestBuilders.put("/api/person/" + addedPerson.getPersonId())
-                            .contentType(MediaType.APPLICATION_JSON)
-                            .content("""
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/person/" + addedPerson.getPersonId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
                                 {
-                                "userName": "BestUser",
+                                "userName": "TestEditor",
                                 "passWord": "987",
-                                "firstName": "Best",
-                                "lastName": "Schmidt"
+                                "firstName": "Hans Dieter",
+                                "lastName": "Genscher",
+                                "loginRole": "EDITOR"
                               }
                                 """)
-                            .with(csrf()))
-                    .andExpect(status().isOk());
+                        .with(csrf()))
+                .andExpect(status().isOk());
 
-            mockMvc.perform(MockMvcRequestBuilders.get("/api/person/" + addedPerson.getPersonId()))
-                    .andExpect(status().isOk())
-                    .andExpect(content().json("""
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/person/" + addedPerson.getPersonId()))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
                         {
-                                "userName": "BestUser",
+                                "userName": "TestEditor",
                                 "passWord": "987",
-                                "firstName": "Best",
-                                "lastName": "Schmidt",
+                                "firstName": "Hans Dieter",
+                                "lastName": "Genscher",
+                                "loginRole": "EDITOR"
                               }
                         """));
-
-        }
+    }
 
     @Test
     @DirtiesContext
     @WithMockUser
-    void delete() {
+    void testDelete() throws Exception {
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/person/user")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                "userName": "TestEditor",
+                                "passWord": "987",
+                                "firstName": "Hans Dieter",
+                                "lastName": "Genscher"
+                              }
+                                """)
+                        .with(csrf()))
+                .andExpect(status().is(200))
+                .andReturn();
+
+        String content = result.getResponse().getContentAsString();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        Person addedPerson = objectMapper.readValue(content, Person.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/person/" + addedPerson.getPersonId())
+                        .with(csrf()))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/person/" + addedPerson.getPersonId()))
+                .andExpect(status().isNotFound());
     }
 }
