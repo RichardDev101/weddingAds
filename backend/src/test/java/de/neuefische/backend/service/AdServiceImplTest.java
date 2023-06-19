@@ -25,12 +25,10 @@ class AdServiceImplTest {
         // ARRANGE
         Advertisement ad = new Advertisement();
         Advertisement expected = new Advertisement();
-
-        //WHEN
+        // ACT
         when(adRepository.save(ad)).thenReturn(expected);
         Advertisement actual = adServiceImpl.save(ad);
-
-        //THEN
+        // ASSERT
         verify(adRepository).save(expected);
         verify(generateUUIDService).getUUID();
         assertEquals(expected, actual);
@@ -124,30 +122,28 @@ class AdServiceImplTest {
         Advertisement originalAdvertisement = new Advertisement();
         originalAdvertisement.setId(id);
 
+        String updatedId= "updatedId3423352";
         Advertisement updatedAdvertisement = new Advertisement();
-        updatedAdvertisement.setId(id);
-        updatedAdvertisement.setTitle("Updated Title");
+        updatedAdvertisement.setId(updatedId);
 
-        // ACT
         when(adRepository.findById(id)).thenReturn(Optional.of(originalAdvertisement));
         when(adRepository.save(updatedAdvertisement)).thenReturn(updatedAdvertisement);
+        // ACT
         String result = adServiceImpl.updateAd(updatedAdvertisement, id);
 
         // ASSERT
         verify(adRepository).findById(id);
         verify(adRepository).save(updatedAdvertisement);
-        assertEquals(id, result);
+        assertEquals(updatedId, result);
     }
 
     @Test
     void testDelete_ShouldDeleteAdvertisement() {
         // ARRANGE
-        String id = "123";
-
+        String id = "946546";
         // ACT
         when(adRepository.findById(id)).thenReturn(Optional.of(new Advertisement()));
         adServiceImpl.delete(id);
-
         // ASSERT
         verify(adRepository).findById(id);
         verify(adRepository).deleteById(id);
