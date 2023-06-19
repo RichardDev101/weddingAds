@@ -12,6 +12,6 @@ public class ControllerAdvisor {
 
     @ExceptionHandler(NoSuchElementException.class)
     private ResponseEntity<Object> handleNoSuchElementException(NoSuchElementException e) {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

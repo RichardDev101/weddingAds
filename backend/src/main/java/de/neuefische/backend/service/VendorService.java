@@ -1,14 +1,13 @@
 package de.neuefische.backend.service;
 
 import de.neuefische.backend.collection.Vendor;
-import de.neuefische.backend.enums.BusinessCategory;
 
 import java.util.List;
 
 public interface VendorService {
-    String saveVendor(Vendor vendor);
+    Vendor saveVendor(Vendor vendor);
     List<Vendor> getAllVendors();
-    Vendor getVendorWithId(String id);
-    String updateVendor(Vendor vendor, String id);
+    Vendor getVendorById(String id);
+    Vendor updateVendor(Vendor vendor, String id);
     void deleteVendor(String id);
 }

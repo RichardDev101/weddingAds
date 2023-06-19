@@ -54,16 +54,16 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Person update(Person person, String id) {
+        personRepository.findById(id).orElseThrow(()->new NoSuchElementException("Person-ID: " +id+ " is not part of the database."));
+        return personRepository.save(person);
+    }
+    @Override
     public void delete(String id) {
         personRepository.findById(id).orElseThrow(()->new NoSuchElementException("Person-ID: " +id+ " is not part of the database."));
         personRepository.deleteById(id);
     }
 
-    @Override
-    public Person update(Person person, String id) {
-        personRepository.findById(id).orElseThrow(()->new NoSuchElementException("Person-ID: " +id+ " is not part of the database."));
-        return personRepository.save(person);
-    }
 
 
 

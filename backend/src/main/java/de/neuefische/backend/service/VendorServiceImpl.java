@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class VendorServiceImpl implements VendorService{
@@ -18,25 +19,28 @@ public class VendorServiceImpl implements VendorService{
     private GenerateUUID uuid;
 
     @Override
-    public String saveVendor(Vendor vendor) {
+    public Vendor saveVendor(Vendor vendor) {
             vendor.setPersonId(uuid.getUUID());
             vendor.setLoginRole(LoginRole.VENDOR);
-            return vendorRepository.save(vendor).getPersonId();
+            return vendorRepository.save(vendor);
         }
     @Override
     public List<Vendor> getAllVendors() {
        return vendorRepository.findAll();
     }
     @Override
-    public Vendor getVendorWithId(String id) {
+    public Vendor getVendorById(String id) {
+        vendorRepository.findById(id).orElseThrow(()->new NoSuchElementException("Vendor-ID: " +id+ " is not part of the database."));
         return vendorRepository.findVendorByPersonId(id);
     }
     @Override
-    public String updateVendor(Vendor vendor, String id) {
-        return vendorRepository.save(vendor).getPersonId();
+    public Vendor updateVendor(Vendor vendor, String id) {
+        vendorRepository.findById(id).orElseThrow(()->new NoSuchElementException("Vendor-ID: " +id+ " is not part of the database."));
+        return vendorRepository.save(vendor);
     }
     @Override
     public void deleteVendor(String id) {
+        vendorRepository.findById(id).orElseThrow(()->new NoSuchElementException("Vendor-ID: " +id+ " is not part of the database."));
         vendorRepository.deleteById(id);
     }
 }
