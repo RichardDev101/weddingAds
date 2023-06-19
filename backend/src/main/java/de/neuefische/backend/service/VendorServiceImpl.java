@@ -1,7 +1,6 @@
 package de.neuefische.backend.service;
 
 import de.neuefische.backend.collection.Vendor;
-import de.neuefische.backend.enums.BusinessCategory;
 import de.neuefische.backend.enums.LoginRole;
 import de.neuefische.backend.repository.VendorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class VendorServiceImpl implements VendorService{
     @Autowired
     private VendorRepository vendorRepository;
     @Autowired
-    private GenerateUUID uuid;
+    private GenerateUUIDService uuid;
 
     @Override
     public Vendor saveVendor(Vendor vendor) {

@@ -1,8 +1,6 @@
 package de.neuefische.backend.service;
 
-import de.neuefische.backend.collection.Advertisement;
 import de.neuefische.backend.collection.Person;
-import de.neuefische.backend.dto.PersonDTO;
 import de.neuefische.backend.enums.LoginRole;
 import de.neuefische.backend.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,7 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonRepository personRepository;
     @Autowired
-    private GenerateUUID uuid;
+    private GenerateUUIDService uuid;
 
     @Override
     public Person saveAdmin(Person person) {

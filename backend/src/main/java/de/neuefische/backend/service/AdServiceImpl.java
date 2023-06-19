@@ -3,23 +3,24 @@ package de.neuefische.backend.service;
 import de.neuefische.backend.collection.Advertisement;
 import de.neuefische.backend.enums.BusinessCategory;
 import de.neuefische.backend.enums.PaymentCategory;
-import de.neuefische.backend.model.Address;
 import de.neuefische.backend.repository.AdRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Service
-@RequiredArgsConstructor
 public class AdServiceImpl implements AdService{
 
     @Autowired
     private AdRepository adRepository;
     @Autowired
-    private GenerateUUID uuid;
+    private GenerateUUIDService uuid;
 
     @Override
     public Advertisement save(Advertisement advertisement) {

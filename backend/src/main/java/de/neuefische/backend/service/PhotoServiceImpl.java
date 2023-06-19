@@ -15,7 +15,7 @@ public class PhotoServiceImpl implements PhotoService{
     @Autowired
     private PhotoRepository photoRepository;
     @Autowired
-    private GenerateUUID uuid;
+    private GenerateUUIDService uuid;
 
     @Override
     public String addPhoto(String originalFilename, MultipartFile image) throws IOException {

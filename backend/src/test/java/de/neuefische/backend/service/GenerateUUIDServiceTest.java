@@ -4,15 +4,15 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
-class GenerateUUIDTest {
+class GenerateUUIDServiceTest {
 
     @Test
     void getUUIDServiceTest() {
         // given
-        GenerateUUID generateUUID = new GenerateUUID();
+        GenerateUUIDService generateUUIDService = new GenerateUUIDService();
 
         // when
-        String newUUID = generateUUID.getUUID();
+        String newUUID = generateUUIDService.getUUID();
 
         // then
         assertNotNull(newUUID);
