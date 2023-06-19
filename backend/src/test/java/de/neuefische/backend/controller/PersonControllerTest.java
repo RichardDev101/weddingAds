@@ -151,10 +151,18 @@ class PersonControllerTest {
                 .andExpect(jsonPath("$[0].personId").isNotEmpty());
     }
 
+
+    @Test
+    void testGetAllPersons() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/persons"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[]"));
+    }
+
     @Test
     @DirtiesContext
     @WithMockUser
-    void getPersonsByRole() throws Exception {
+    void testGetPersonsByRole() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/person/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -303,4 +311,5 @@ class PersonControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/person/" + addedPerson.getPersonId()))
                 .andExpect(status().isNotFound());
     }
+
 }
