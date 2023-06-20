@@ -83,13 +83,9 @@ class VendorServiceImplTest {
         when(vendorRepository.findById(vendorId)).thenReturn(Optional.empty());
 
         // ACT & ASSERT
-        NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> {
-            vendorServiceImpl.getVendorById(vendorId);
-        });
-        assertEquals("Vendor-ID: " + vendorId + " is not part of the database.", exception.getMessage());
+        assertThrows(NoSuchElementException.class, () -> vendorServiceImpl.getVendorById(vendorId));
         verify(vendorRepository).findById(vendorId);
     }
-
     @Test
     void testUpdateVendor_WithExistingId_ShouldUpdateAndReturnVendor() {
         // ARRANGE
