@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,19 +32,24 @@ public class VendorServiceImpl implements VendorService{
     public List<Vendor> getAllVendors() {
        return vendorRepository.findAll();
     }
+
     @Override
     public Vendor getVendorById(String id) {
-        vendorRepository.findById(id).orElseThrow(()->new NoSuchElementException("Vendor-ID: " +id+ " is not part of the database."));
-        return vendorRepository.findVendorByPersonId(id);
+        Optional<Vendor> optionalVendor = vendorRepository.findById(id);
+        if(optionalVendor.isPresent()){
+            return optionalVendor.get();
+        }else{
+            throw new NoSuchElementException("Vendor-ID: " + id + " is not part of the database.");
+        }
     }
+
     @Override
     public Vendor updateVendor(Vendor vendor, String id) {
-        vendorRepository.findById(id).orElseThrow(()->new NoSuchElementException("Vendor-ID: " +id+ " is not part of the database."));
         return vendorRepository.save(vendor);
     }
+
     @Override
     public void deleteVendor(String id) {
-        vendorRepository.findById(id).orElseThrow(()->new NoSuchElementException("Vendor-ID: " +id+ " is not part of the database."));
         vendorRepository.deleteById(id);
     }
 }

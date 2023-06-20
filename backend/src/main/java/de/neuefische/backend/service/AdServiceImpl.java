@@ -1,6 +1,7 @@
 package de.neuefische.backend.service;
 
 import de.neuefische.backend.collection.Advertisement;
+import de.neuefische.backend.collection.Photo;
 import de.neuefische.backend.enums.BusinessCategory;
 import de.neuefische.backend.enums.PaymentCategory;
 import de.neuefische.backend.repository.AdRepository;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Service
@@ -33,7 +36,12 @@ public class AdServiceImpl implements AdService{
     }
     @Override
     public Advertisement getAdWithId(String id) {
-        return adRepository.findById(id).orElseThrow(()->new NoSuchElementException("ID: " +id+ " is not part of the database."));
+        Optional<Advertisement> optionalAdvertisement = adRepository.findById(id);
+        if (optionalAdvertisement.isPresent()) {
+            return optionalAdvertisement.get();
+        } else {
+            throw new NoSuchElementException("Advertisement-ID: " + id + " not found.");
+        }
     }
     @Override
     public List<Advertisement> getAdByBusiness(BusinessCategory businessCategory) {
@@ -49,12 +57,10 @@ public class AdServiceImpl implements AdService{
     }
     @Override
     public String updateAd(Advertisement advertisement, String id) {
-        adRepository.findById(id).orElseThrow(()->new NoSuchElementException("Ad-ID: " +id+ " is not part of the database."));
         return adRepository.save(advertisement).getId();
     }
     @Override
     public void delete(String id) {
-        adRepository.findById(id).orElseThrow(()->new NoSuchElementException("Ad-ID: " +id+ " is not part of the database."));
         adRepository.deleteById(id);
     }
 

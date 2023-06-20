@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Service
@@ -51,18 +53,21 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getPersonById(String id) {
-        return personRepository.findById(id).orElseThrow(()->new NoSuchElementException("Person-ID: " +id+ " is not part of the database."));
+        Optional<Person> optionalPerson = personRepository.findById(id);
+        if (optionalPerson.isPresent()){
+            return optionalPerson.get();
+        } else {
+            throw new NoSuchElementException("Person-ID: " +id+ " is not part of the database.");
+        }
     }
 
     @Override
     public Person update(Person person, String id) {
-        personRepository.findById(id).orElseThrow(()->new NoSuchElementException("Person-ID: " +id+ " is not part of the database."));
         return personRepository.save(person);
     }
 
     @Override
     public void delete(String id) {
-        personRepository.findById(id).orElseThrow(()->new NoSuchElementException("Person-ID: " +id+ " is not part of the database."));
         personRepository.deleteById(id);
     }
 
