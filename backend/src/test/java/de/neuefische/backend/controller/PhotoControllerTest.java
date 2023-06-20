@@ -49,7 +49,7 @@ class PhotoControllerTest {
     }*/
     @Test
     @DirtiesContext
-    public void testDownloadPhoto() throws Exception {
+    void testDownloadPhoto() throws Exception {
         Photo photo = new Photo();
         photo.setImage(new Binary("Test data".getBytes()));
         photo.setTitle("test.jpg");
@@ -65,7 +65,7 @@ class PhotoControllerTest {
         verify(photoService).getPhoto("photoId123");
     }
     @Test
-    public void testGetPhoto() throws Exception {
+    void testGetPhoto() throws Exception {
         Photo photo = new Photo();
         photo.setImage(new Binary("Test data".getBytes()));
         photo.setTitle("test.jpg");
@@ -79,14 +79,14 @@ class PhotoControllerTest {
 
         verify(photoService).getPhoto("photoId123");
     }
-        @Test
-        @DirtiesContext
-        public void testDeletePhoto() throws Exception {
-            mockMvc.perform(delete("/api/photo/{id}", "photoId123"))
-                    .andExpect(status().isOk())
-                    .andExpect(content().string("Image with photoId123 has been deleted."));
+    @Test
+    @DirtiesContext
+    void testDeletePhoto() throws Exception {
+        mockMvc.perform(delete("/api/photo/{id}", "photoId123"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Image with photoId123 has been deleted."));
 
-            verify(photoService).deletePhoto("photoId123");
-        }
+        verify(photoService).deletePhoto("photoId123");
+    }
 
 }
