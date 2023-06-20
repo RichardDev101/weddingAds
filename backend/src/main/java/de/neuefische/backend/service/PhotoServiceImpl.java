@@ -29,7 +29,7 @@ public class PhotoServiceImpl implements PhotoService{
         Photo photo = new Photo();
         photo.setId(uuid.getUUID());
         photo.setTitle(originalFilename);
-        photo.setPhoto(new Binary(BsonBinarySubType.BINARY, image.getBytes()));
+        photo.setImage(new Binary(BsonBinarySubType.BINARY, image.getBytes()));
         return photoRepository.save(photo).getId();
     }
     @Override
@@ -38,7 +38,7 @@ public class PhotoServiceImpl implements PhotoService{
         if (optionalPhoto.isPresent()) {
             return optionalPhoto.get();
         } else {
-            throw new NoSuchElementException("Photo with ID: " + id + " not found.");
+            throw new NoSuchElementException();
         }
     }
     @Override

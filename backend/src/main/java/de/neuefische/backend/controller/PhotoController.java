@@ -29,7 +29,7 @@ public class PhotoController {
     public ResponseEntity<Resource> downloadPhoto(@PathVariable String id){
         Photo photo = photoService.getPhoto(id);
         Resource resource
-                = new ByteArrayResource(photo.getPhoto().getData());
+                = new ByteArrayResource(photo.getImage().getData());
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\""+photo.getTitle()+"\"")
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
@@ -43,7 +43,7 @@ public class PhotoController {
             return ResponseEntity.notFound().build();
         }
 
-        byte[] imageData = photo.getPhoto().getData();
+        byte[] imageData = photo.getImage().getData();
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);

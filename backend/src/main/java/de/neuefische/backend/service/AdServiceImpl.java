@@ -39,7 +39,7 @@ public class AdServiceImpl implements AdService{
         if (optionalAdvertisement.isPresent()) {
             return optionalAdvertisement.get();
         } else {
-            throw new NoSuchElementException("Advertisement-ID: " + id + " not found.");
+            throw new NoSuchElementException();
         }
     }
     @Override

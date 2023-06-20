@@ -51,7 +51,7 @@ class PhotoControllerTest {
     @DirtiesContext
     public void testDownloadPhoto() throws Exception {
         Photo photo = new Photo();
-        photo.setPhoto(new Binary("Test data".getBytes()));
+        photo.setImage(new Binary("Test data".getBytes()));
         photo.setTitle("test.jpg");
 
         when(photoService.getPhoto("photoId123")).thenReturn(photo);
@@ -67,7 +67,7 @@ class PhotoControllerTest {
     @Test
     public void testGetPhoto() throws Exception {
         Photo photo = new Photo();
-        photo.setPhoto(new Binary("Test data".getBytes()));
+        photo.setImage(new Binary("Test data".getBytes()));
         photo.setTitle("test.jpg");
 
         when(photoService.getPhoto("photoId123")).thenReturn(photo);

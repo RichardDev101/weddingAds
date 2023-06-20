@@ -39,7 +39,7 @@ public class VendorServiceImpl implements VendorService{
         if(optionalVendor.isPresent()){
             return optionalVendor.get();
         }else{
-            throw new NoSuchElementException("Vendor-ID: " + id + " is not part of the database.");
+            throw new NoSuchElementException();
         }
     }
 
@@ -47,7 +47,7 @@ public class VendorServiceImpl implements VendorService{
     public Vendor updateVendor(Vendor vendor, String id) {
         Optional<Vendor> optionalVendor = vendorRepository.findById(id);
         if(optionalVendor.isEmpty()){
-            throw new NoSuchElementException("Vendor-ID: " + id + " is not part of the database.");
+            throw new NoSuchElementException();
         }else{
             return vendorRepository.save(vendor);
         }
@@ -57,7 +57,7 @@ public class VendorServiceImpl implements VendorService{
     public void deleteVendor(String id) {
         Optional<Vendor> optionalVendor = vendorRepository.findById(id);
         if(optionalVendor.isEmpty()){
-            throw new NoSuchElementException("Vendor-ID: " + id + " is not part of the database.");
+            throw new NoSuchElementException();
         }else{
             vendorRepository.deleteById(id);
         }

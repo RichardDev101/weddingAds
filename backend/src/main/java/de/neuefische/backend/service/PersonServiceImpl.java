@@ -58,7 +58,7 @@ public class PersonServiceImpl implements PersonService {
         if (optionalPerson.isPresent()){
             return optionalPerson.get();
         } else {
-            throw new NoSuchElementException("Person-ID: " +id+ " is not part of the database.");
+            throw new NoSuchElementException();
         }
     }
 
@@ -66,7 +66,7 @@ public class PersonServiceImpl implements PersonService {
     public Person update(Person person, String id) {
         Optional<Person> optionalPerson = personRepository.findById(id);
         if (optionalPerson.isEmpty()){
-            throw new NoSuchElementException("Person-ID: " +id+ " is not part of the database.");
+            throw new NoSuchElementException();
         }else {
             return personRepository.save(person);
         }
@@ -76,7 +76,7 @@ public class PersonServiceImpl implements PersonService {
     public void delete(String id) {
         Optional<Person> optionalPerson = personRepository.findById(id);
         if (optionalPerson.isEmpty()){
-            throw new NoSuchElementException("Person-ID: " +id+ " is not part of the database.");
+            throw new NoSuchElementException();
         }else {
             personRepository.deleteById(id);
         }
