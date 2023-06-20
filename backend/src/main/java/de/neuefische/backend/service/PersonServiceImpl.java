@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -63,12 +64,22 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person update(Person person, String id) {
-        return personRepository.save(person);
+        Optional<Person> optionalPerson = personRepository.findById(id);
+        if (optionalPerson.isEmpty()){
+            throw new NoSuchElementException("Person-ID: " +id+ " is not part of the database.");
+        }else {
+            return personRepository.save(person);
+        }
     }
 
     @Override
     public void delete(String id) {
-        personRepository.deleteById(id);
+        Optional<Person> optionalPerson = personRepository.findById(id);
+        if (optionalPerson.isEmpty()){
+            throw new NoSuchElementException("Person-ID: " +id+ " is not part of the database.");
+        }else {
+            personRepository.deleteById(id);
+        }
     }
 
 }

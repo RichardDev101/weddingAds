@@ -2,6 +2,7 @@ package de.neuefische.backend.service;
 
 import de.neuefische.backend.collection.Person;
 import de.neuefische.backend.enums.LoginRole;
+
 import java.util.List;
 
 public interface PersonService {

@@ -2,6 +2,7 @@ package de.neuefische.backend.service;
 
 import de.neuefische.backend.collection.Photo;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 
 public interface PhotoService {

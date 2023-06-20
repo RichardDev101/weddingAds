@@ -1,8 +1,9 @@
 package de.neuefische.backend.controller;
 
-import de.neuefische.backend.dto.AdvertisementDTO;
 import de.neuefische.backend.collection.Advertisement;
-import de.neuefische.backend.enums.*;
+import de.neuefische.backend.dto.AdvertisementDTO;
+import de.neuefische.backend.enums.BusinessCategory;
+import de.neuefische.backend.enums.PaymentCategory;
 import de.neuefische.backend.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,6 @@
 package de.neuefische.backend.service;
 
 import de.neuefische.backend.collection.Advertisement;
-import de.neuefische.backend.collection.Photo;
 import de.neuefische.backend.enums.BusinessCategory;
 import de.neuefische.backend.enums.PaymentCategory;
 import de.neuefische.backend.repository.AdRepository;
@@ -57,11 +56,20 @@ public class AdServiceImpl implements AdService{
     }
     @Override
     public String updateAd(Advertisement advertisement, String id) {
-        return adRepository.save(advertisement).getId();
+        Optional<Advertisement> optionalAdvertisement = adRepository.findById(id);
+        if(optionalAdvertisement.isEmpty()){
+            throw new NoSuchElementException();
+        }else {
+            return adRepository.save(advertisement).getId();
+        }
     }
     @Override
     public void delete(String id) {
-        adRepository.deleteById(id);
+        Optional<Advertisement> optionalAdvertisement = adRepository.findById(id);
+        if(optionalAdvertisement.isEmpty()){
+            throw new NoSuchElementException();
+        }else {
+            adRepository.deleteById(id);
+        }
     }
-
 }

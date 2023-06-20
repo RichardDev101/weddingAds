@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 
 @RestController
@@ -22,8 +23,7 @@ public class PhotoController {
 
     @PostMapping
     public String addPhoto(@RequestParam("image") MultipartFile  image) throws IOException {
-        String id = photoService.addPhoto(image.getOriginalFilename(),image);
-        return id;
+       return photoService.addPhoto(image.getOriginalFilename(),image);
     }
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> downloadPhoto(@PathVariable String id){

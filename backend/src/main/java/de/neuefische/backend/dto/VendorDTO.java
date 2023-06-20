@@ -1,6 +1,5 @@
 package de.neuefische.backend.dto;
 
-import de.neuefische.backend.collection.Vendor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

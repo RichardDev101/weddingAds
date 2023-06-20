@@ -9,8 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -64,15 +66,13 @@ class VendorServiceImplTest {
         // ARRANGE
         String vendorId = "123";
         Vendor vendor = new Vendor();
-        when(vendorRepository.findById(vendorId)).thenReturn(java.util.Optional.of(vendor));
-        when(vendorRepository.findVendorByPersonId(vendorId)).thenReturn(vendor);
+        when(vendorRepository.findById(vendorId)).thenReturn(Optional.of(vendor));
 
         // ACT
         Vendor result = vendorServiceImpl.getVendorById(vendorId);
 
         // ASSERT
         verify(vendorRepository).findById(vendorId);
-        verify(vendorRepository).findVendorByPersonId(vendorId);
         assertEquals(vendor, result);
     }
 
@@ -80,12 +80,14 @@ class VendorServiceImplTest {
     void testGetVendorById_WithNonExistingId_ShouldThrowException() {
         // ARRANGE
         String vendorId = "123";
-        when(vendorRepository.findById(vendorId)).thenReturn(java.util.Optional.empty());
+        when(vendorRepository.findById(vendorId)).thenReturn(Optional.empty());
 
         // ACT & ASSERT
-        assertThrows(NoSuchElementException.class, () -> vendorServiceImpl.getVendorById(vendorId));
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> {
+            vendorServiceImpl.getVendorById(vendorId);
+        });
+        assertEquals("Vendor-ID: " + vendorId + " is not part of the database.", exception.getMessage());
         verify(vendorRepository).findById(vendorId);
-        verify(vendorRepository, never()).findVendorByPersonId(vendorId);
     }
 
     @Test
@@ -93,7 +95,7 @@ class VendorServiceImplTest {
         // ARRANGE
         String vendorId = "123";
         Vendor vendor = new Vendor();
-        when(vendorRepository.findById(vendorId)).thenReturn(java.util.Optional.of(vendor));
+        when(vendorRepository.findById(vendorId)).thenReturn(Optional.of(vendor));
         when(vendorRepository.save(vendor)).thenReturn(vendor);
 
         // ACT
@@ -108,10 +110,11 @@ class VendorServiceImplTest {
     void testDeleteVendor_WithNonExistingId_ShouldThrowException() {
         // ARRANGE
         String vendorId = "123";
-        when(vendorRepository.findById(vendorId)).thenReturn(java.util.Optional.empty());
+        when(vendorRepository.findById(vendorId)).thenReturn(Optional.empty());
 
         // ACT & ASSERT
         assertThrows(NoSuchElementException.class, () -> vendorServiceImpl.deleteVendor(vendorId));
+
         verify(vendorRepository).findById(vendorId);
         verify(vendorRepository, never()).deleteById(vendorId);
     }

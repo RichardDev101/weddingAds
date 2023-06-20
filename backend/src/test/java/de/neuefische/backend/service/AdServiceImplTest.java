@@ -141,9 +141,11 @@ class AdServiceImplTest {
     void testDelete_ShouldDeleteAdvertisement() {
         // ARRANGE
         String id = "946546";
-        // ACT
         when(adRepository.findById(id)).thenReturn(Optional.of(new Advertisement()));
+
+        // ACT
         adServiceImpl.delete(id);
+
         // ASSERT
         verify(adRepository).findById(id);
         verify(adRepository).deleteById(id);

@@ -45,11 +45,21 @@ public class VendorServiceImpl implements VendorService{
 
     @Override
     public Vendor updateVendor(Vendor vendor, String id) {
-        return vendorRepository.save(vendor);
+        Optional<Vendor> optionalVendor = vendorRepository.findById(id);
+        if(optionalVendor.isEmpty()){
+            throw new NoSuchElementException("Vendor-ID: " + id + " is not part of the database.");
+        }else{
+            return vendorRepository.save(vendor);
+        }
     }
 
     @Override
     public void deleteVendor(String id) {
-        vendorRepository.deleteById(id);
+        Optional<Vendor> optionalVendor = vendorRepository.findById(id);
+        if(optionalVendor.isEmpty()){
+            throw new NoSuchElementException("Vendor-ID: " + id + " is not part of the database.");
+        }else{
+            vendorRepository.deleteById(id);
+        }
     }
 }
