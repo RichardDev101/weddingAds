@@ -10,7 +10,5 @@ import java.util.List;
 
 @Repository
 public interface AdRepository extends MongoRepository<Advertisement, String> {
-    List<Advertisement> findAdvertisementsByBusinessCategories(BusinessCategory businessCategory);
-    List<Advertisement> findAdvertisementsByPaymentCategory(PaymentCategory paymentCategory);
-    List<Advertisement> findAdvertisementsByAveragePriceIsLessThanEqual(float averagePrice);
+
 }

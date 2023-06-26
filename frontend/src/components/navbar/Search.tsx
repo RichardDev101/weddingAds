@@ -13,7 +13,7 @@ export default function Search() {
                     Any Category
                 </div>
                 <div
-                    className="p-2 bg-amber-500 rounded-full text-white">
+                    className="p-2 bg-orange-500 rounded-full text-white">
                     <BiSearch size={18} />
                 </div>
             </div>
