@@ -14,7 +14,6 @@ import java.util.List;
 @Data
 public class AdvertisementDTO {
 
-    private String id;
     private AdvertisementStatus advertisementStatus;
     private PaymentCategory paymentCategory;
     private Company company;
