@@ -1,6 +1,7 @@
 package dev.projects.backend.controller;
 
 import dev.projects.backend.collection.Advertisement;
+import dev.projects.backend.dto.AdvertisementDTO;
 import dev.projects.backend.service.AdService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class AdController {
     private final AdService adService;
 
     @PostMapping()
-    public Advertisement save(@RequestBody Advertisement ad){
+    public Advertisement save(@RequestBody AdvertisementDTO ad){
         return adService.save(ad);
     }
     @GetMapping()

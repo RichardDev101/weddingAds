@@ -1,6 +1,7 @@
 package dev.projects.backend.service;
 
 import dev.projects.backend.collection.Advertisement;
+import dev.projects.backend.dto.AdvertisementDTO;
 import dev.projects.backend.repository.AdRepository;
 import org.junit.jupiter.api.Test;
 
@@ -18,11 +19,12 @@ class AdServiceTest {
     @Test
     void testSaveAdvertisement_ShouldSaveAdvertisementAndReturnExpected() {
         // ARRANGE
+        AdvertisementDTO adDTO = new AdvertisementDTO();
         Advertisement ad = new Advertisement();
         Advertisement expected = new Advertisement();
         // ACT
         when(adRepository.save(ad)).thenReturn(expected);
-        Advertisement actual = adService.save(ad);
+        Advertisement actual = adService.save(adDTO);
         // ASSERT
         verify(adRepository).save(expected);
         verify(generateUUIDService).getUUID();
