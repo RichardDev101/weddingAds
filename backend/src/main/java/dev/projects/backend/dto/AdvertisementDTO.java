@@ -20,9 +20,6 @@ public class AdvertisementDTO {
     private List<BusinessCategory> businessCategories;
     private List<String> photosID;
     private String title;
-    private String aboutYourself;
-    private String detailInformationForService;
-    private float averagePrice;
     private List<PriceCategory> priceCategories;
     private List<ContactDetail> contacts;
     private List<Address> locations;
