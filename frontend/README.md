@@ -48,3 +48,7 @@ ___
 
 Import:
 
+Tailwind
+
+Install BrowserRouter:
+npm install react-router-dom
