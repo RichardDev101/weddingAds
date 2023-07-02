@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
-import Gallery from "./components/Home";
-import AdForm from "./components/AdForm";
+import Gallery from "./components/gallary/Home";
+import AdForm from "./components/gallary/AdForm";
 import Home from "./app/page";
 
-function App() {
+export default function App() {
 
     return (
         <html lang="en">
@@ -23,5 +23,4 @@ function App() {
     );
 }
 
-export default App;
 
