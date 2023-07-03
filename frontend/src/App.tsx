@@ -2,9 +2,8 @@ import React from 'react';
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
 import {Route, Routes} from "react-router-dom";
-import Gallery from "./components/gallary/Home";
 import AdForm from "./components/gallary/AdForm";
-import Home from "./app/page";
+import Home from "./components/gallary/Home";
 
 export default function App() {
 

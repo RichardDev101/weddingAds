@@ -9,6 +9,7 @@ import {Address} from "cluster";
 
 
 export type Advertisement={
+    id: string,
     advertisementStatus: AdvetisementSatus,
     paymentCategory: PaymentCategory,
     company: Company,

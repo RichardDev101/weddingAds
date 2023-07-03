@@ -17,7 +17,7 @@ function AdForm() {
     }
 
     return (
-        <div className="max-w-screen-sm rounded-lg p-6 dark:bg-neutral-500">
+        <div className="pt-24 max-w-screen-sm rounded-lg p-6 dark:bg-neutral-500">
             <form>
                 <div>
                     <label htmlFor="helper-text"
