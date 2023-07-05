@@ -20,7 +20,7 @@ export default function Home() {
         <Container>
             <div className="border-solid border-gray-500 rounded-md bg-green-400 w-48 h-12">
                 <div className="">
-                    {allAds.map(ad => <AdCard ad={ad}/>)}
+                    {allAds.map(ad => <AdCard ad={ad} key={ad.id} />)}
                 </div>
             </div>
         </Container>

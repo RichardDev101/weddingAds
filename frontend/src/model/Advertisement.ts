@@ -22,5 +22,5 @@ export type Advertisement={
     priceCategories: PriceCategory,
     customerContacts: ContactDetail,
     locations:Address,
-    personsID: String
+    personsID: string
 }

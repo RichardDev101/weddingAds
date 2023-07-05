@@ -1,4 +1,4 @@
-import {MdBakeryDining, MdFlightTakeoff, MdOutlineVilla} from "react-icons/md";
+import {MdBakeryDining, MdFlightTakeoff} from "react-icons/md";
 import {
     GiAmpleDress,
     GiChurch,
@@ -7,7 +7,6 @@ import {
     GiPapers, GiPartyPopper,
     GiPhotoCamera, GiPorcelainVase,
     GiTrumpet,
-    GiWindmill
 } from "react-icons/gi";
 import {ImHeadphones, ImVideoCamera} from "react-icons/im";
 import {FaUserTie} from "react-icons/fa";

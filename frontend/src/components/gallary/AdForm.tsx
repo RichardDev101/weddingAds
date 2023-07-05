@@ -1,8 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
-import {LuFileInput} from "react-icons/lu";
 import axios from "axios";
 import {businessCategories} from "../../enum/BusinessCategory";
-import * as string_decoder from "string_decoder";
 
 export default function AdForm() {
 
