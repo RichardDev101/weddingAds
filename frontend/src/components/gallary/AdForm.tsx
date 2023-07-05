@@ -6,8 +6,8 @@ import * as string_decoder from "string_decoder";
 
 export default function AdForm() {
 
-    const[titleInput, setTitleInput]=useState<string>("")
-    const[companyNameInput, setCompanyNameInput]=useState<string>("")
+
+    const [companyNameInput, setCompanyNameInput]=useState<string>("")
     const [companyAddressStreetNameInput, setCompanyAddressStreetNameInput]=useState<string>("")
     const [companyAddressStreetNoInput, setCompanyAddressStreetNoInput]=useState<string>("")
     const [companyAddressCompartmentInput, setCompanyAddressCompartmentInput]=useState<string>("")
@@ -19,6 +19,9 @@ export default function AdForm() {
     const [contactsPhoneNumberInput, setContactsPhoneNumberInput]=useState<string>("")
     const [contactsHomePageURLInput, setContactsHomePageURLInput]=useState<string>("")
     const [businessCategoryInput, setBusinessCategoryInput]=useState<string>("")
+    const [titleInput, setTitleInput]=useState<string>("")
+    const [aboutYourselfInput, setAboutYourselfInputInput]=useState<string>("")
+    const [detailInformationForServiceInput, setDetailInformationForServiceInput]=useState<string>("")
     function adAdvertisement() {
         axios.post("/api/ad", [
             {
@@ -40,9 +43,9 @@ export default function AdForm() {
                 "photosID": [
                     "string"
                 ],
-                "title": "string",
-                "aboutYourself": "string",
-                "detailInformationForService": "string",
+                "title": titleInput,
+                "aboutYourself": aboutYourselfInput,
+                "detailInformationForService": detailInformationForServiceInput,
                 "averagePrice": 0,
                 "priceCategories": [
                     "PER_HOUR"
@@ -112,6 +115,12 @@ export default function AdForm() {
     };
     function titleHandler(event: ChangeEvent<HTMLInputElement>) {
         setTitleInput(event.target.value)
+    };
+    function aboutYourselfHandler(event: ChangeEvent<HTMLTextAreaElement>) {
+        setAboutYourselfInputInput(event.target.value)
+    };
+    function detailInformationForServiceHandler(event: ChangeEvent<HTMLTextAreaElement>) {
+        setDetailInformationForServiceInput(event.target.value)
     }
 
 
@@ -318,8 +327,9 @@ export default function AdForm() {
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                    aria-describedby="helper-text-explanation"
                                                    placeholder="Choose a short titel for your advertisement"
-                                                   value={titleInput}
                                                    onChange={titleHandler}
+                                                   value={titleInput}
+
                                             />
                                         </div>
                                         <div className="md:col-span-6">
@@ -328,6 +338,8 @@ export default function AdForm() {
                                                       rows={4}
                                                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                       placeholder="Write something about yourself"
+                                                      onChange={aboutYourselfHandler}
+                                                      value={aboutYourselfInput}
                                             />
                                         </div>
 
@@ -335,10 +347,10 @@ export default function AdForm() {
                                             <label htmlFor="message">Service information in detail</label>
                                             <textarea id="message"
                                                       rows={6}
-
                                                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
                                                       placeholder="Write something about your service"
+                                                      onChange={detailInformationForServiceHandler}
+                                                      value={detailInformationForServiceInput}
                                             />
                                         </div>
 
