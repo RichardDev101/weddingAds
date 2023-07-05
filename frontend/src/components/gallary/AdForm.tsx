@@ -1,6 +1,7 @@
 import React, {ChangeEvent, useState} from 'react';
 import axios from "axios";
 import {businessCategories} from "../../enum/BusinessCategory";
+import {Advertisement} from "../../model/Advertisement";
 
 export default function AdForm() {
 
