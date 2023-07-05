@@ -36,51 +36,53 @@ export default function AdForm() {
     const [shopLocationCityInput, setShopLocationCityInput]=useState<string>("")
     const [shopLocationStateInput, setShopLocationStateInput]=useState<string>("")
     const [shopLocationCountryInput, setShopLocationCountryInput]=useState<string>("")
+
     function adAdvertisement() {
-        axios.post("/api/ad", [
-            {
-            "company": {
-                "name": companyNameInput,
-                "address": {
-                    "streetName": companyAddressStreetNameInput,
-                    "houseNo": companyAddressStreetNoInput,
-                    "apartment": companyAddressCompartmentInput,
-                    "zipCode": companyAddressZipCodeInput,
-                    "city": companyAddressCityInput,
-                    "country": companyAddressStateInput,
-                    "geoData": companyAddressCountryInput
+        const advertisementData = {
+            company: {
+                name: companyNameInput,
+                address: {
+                    streetName: companyAddressStreetNameInput,
+                    houseNo: companyAddressStreetNoInput,
+                    apartment: companyAddressCompartmentInput,
+                    zipCode: companyAddressZipCodeInput,
+                    city: companyAddressCityInput,
+                    country: companyAddressStateInput,
+                    geoData: companyAddressCountryInput
                 },
-                "contacts": {
-                    "email": contactsEmailInput,
-                    "phoneNumber": contactsPhoneNumberInput,
-                    "homepageURL": contactsHomePageURLInput
+                contacts: {
+                    email: contactsEmailInput,
+                    phoneNumber: contactsPhoneNumberInput,
+                    homepageURL: contactsHomePageURLInput
                 }
             },
-                "businessCategories": [
-                    businessCategoryInput
-                ],
-                "title": titleInput,
-                "aboutYourself": aboutYourselfInput,
-                "detailInformationForService": detailInformationForServiceInput,
-                "customerContacts": [
-                    {
-                        "email": customerContactsEmailInput,
-                        "phoneNumber": customerContactsPhoneNumberInput,
-                        "homepageURL": customerContactsHomePageURLInput
-                    }
-                ],
-                "locations": [
-                    {
-                        "streetName": shopLocationStreetNameInput,
-                        "houseNo": shopLocationStreetNoInput,
-                        "zipCode": shopLocationZipCodeInput,
-                        "city": shopLocationCityInput,
-                        "country": shopLocationCountryInput
-                    }
-                ],
-            }
+            businessCategories: [
+                businessCategoryInput
+            ],
+            title: titleInput,
+            aboutYourself: aboutYourselfInput,
+            detailInformationForService: detailInformationForServiceInput,
+            customerContacts: [
+                {
+                    email: customerContactsEmailInput,
+                    phoneNumber: customerContactsPhoneNumberInput,
+                    homepageURL: customerContactsHomePageURLInput
+                }
+            ],
+            locations: [
+                {
+                    streetName: shopLocationStreetNameInput,
+                    houseNo: shopLocationStreetNoInput,
+                    zipCode: shopLocationZipCodeInput,
+                    city: shopLocationCityInput,
+                    country: shopLocationCountryInput
+                }
             ]
-        ).then(response=>console.log(response.data))
+        };
+
+        axios.post("/api/ad", advertisementData)
+            .then(response => console.log(response.data))
+            .catch(error => console.error(error));
     }
 
     function companyNameHandler(event: ChangeEvent<HTMLInputElement>){
@@ -121,7 +123,7 @@ export default function AdForm() {
 
 
 
-    function businessCategoryHandler(event: ChangeEvent<HTMLInputElement>) {
+    function businessCategoryHandler(event: ChangeEvent<HTMLSelectElement>) {
         setBusinessCategoryInput(event.target.value)
     };
     function titleHandler(event: ChangeEvent<HTMLInputElement>) {
@@ -183,7 +185,7 @@ export default function AdForm() {
                                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-6">
 
                                         <div className="md:col-span-6">
-                                            <label htmlFor="full_name">Company Name or full Name of Contractor</label>
+                                            <label htmlFor="company_name">Company Name or full Name of Contractor</label>
                                             <input type="text" name="company_name" id="company_name"
                                                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                                    onChange={companyNameHandler}
@@ -353,17 +355,26 @@ export default function AdForm() {
                                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-6">
 
                                         <div className="md:col-span-2">
-                                            <label htmlFor="company">Business Category</label>
-                                            <input type="text" id="company"
-                                                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                   placeholder="Limited" required
-                                                   onChange={businessCategoryHandler}
-                                                   value={businessCategoryInput}
-                                            />
+                                            <label htmlFor="business_category">Business Category</label>
+                                            <select
+                                                id="business_category"
+                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                required
+                                                onChange={businessCategoryHandler}
+                                                value={businessCategoryInput}
+                                            >
+                                                <option value="">Select a category</option>
+                                                {businessCategories.map((category) => (
+                                                    <option key={category.label} value={category.label}>
+                                                        {category.label}
+                                                    </option>
+                                                ))}
+                                            </select>
                                         </div>
+
                                         <div className="md:col-span-4">
-                                            <label htmlFor="helper-text">Title for your Advertisement</label>
-                                            <input type="text"
+                                            <label htmlFor="title_ad">Title for your Advertisement</label>
+                                            <input type="text" id="title_ad"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                    aria-describedby="helper-text-explanation"
                                                    placeholder="Choose a short titel for your advertisement"
@@ -373,8 +384,8 @@ export default function AdForm() {
                                             />
                                         </div>
                                         <div className="md:col-span-6">
-                                            <label htmlFor="message">About Yourself</label>
-                                            <textarea id="message"
+                                            <label htmlFor="about_yourself">About Yourself</label>
+                                            <textarea id="about_yourself"
                                                       rows={4}
                                                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                       placeholder="Write something about yourself"
@@ -384,8 +395,8 @@ export default function AdForm() {
                                         </div>
 
                                         <div className="md:col-span-6">
-                                            <label htmlFor="message">Service Information in Detail</label>
-                                            <textarea id="message"
+                                            <label htmlFor="service_information">Service Information in Detail</label>
+                                            <textarea id="service_information"
                                                       rows={6}
                                                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                       placeholder="Write something about your service"
@@ -424,8 +435,8 @@ export default function AdForm() {
                                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-6">
 
                                         <div className="md:col-span-3">
-                                            <label htmlFor="email">Email Address</label>
-                                            <input type="email" id="email"
+                                            <label htmlFor="customer_contact_email">Email Address</label>
+                                            <input type="email" id="customer_contact_email"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                    placeholder="max.example@company.com"
                                                    onChange={customerContactsEmailHandler}
@@ -433,8 +444,8 @@ export default function AdForm() {
                                             />
                                         </div>
                                         <div className="md:col-span-3">
-                                            <label htmlFor="phone" >Phone Number</label>
-                                            <input type="tel" id="phone"
+                                            <label htmlFor="customer_contact_phone" >Phone Number</label>
+                                            <input type="tel" id="customer_contact_phone"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                    placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                                                    onChange={customerContactsPhoneNumberHandler}
@@ -442,8 +453,8 @@ export default function AdForm() {
                                             />
                                         </div>
                                         <div className="md:col-span-6">
-                                            <label htmlFor="website">Website URL</label>
-                                            <input type="url" id="website"
+                                            <label htmlFor="customer_contact_website">Website URL</label>
+                                            <input type="url" id="customer_contact_website"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                    placeholder="url.com"
                                                    onChange={customerContactsHomePageURLHandler}

@@ -47,32 +47,32 @@ export enum BusinessCategory {
 
 export const businessCategories = [
     {
-        label: 'Photographer',
+        label: 'PHOTOGRAPHER',
         icon: GiPhotoCamera,
         description: '',
     },
     {
-        label: 'Videographer',
+        label: 'VIDEOGRAPHER',
         icon: ImVideoCamera,
         description: '',
     },
     {
-        label: 'Beauty Salon',
+        label: 'BEAUTY_SALON',
         icon: GiLipstick,
         description: ''
     },
     {
-        label: 'Dresses',
+        label: 'DRESSES',
         icon: GiAmpleDress,
         description: ''
     },
     {
-        label: 'Suits',
+        label: 'SUITS',
         icon: FaUserTie,
         description: ''
     },
     {
-        label: 'Hair Dresser',
+        label: 'HAIR_DRESSER',
         icon: BsScissors,
         description: ''
     },
