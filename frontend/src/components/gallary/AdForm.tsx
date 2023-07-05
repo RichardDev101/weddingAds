@@ -22,6 +22,10 @@ export default function AdForm() {
     const [titleInput, setTitleInput]=useState<string>("")
     const [aboutYourselfInput, setAboutYourselfInputInput]=useState<string>("")
     const [detailInformationForServiceInput, setDetailInformationForServiceInput]=useState<string>("")
+    const [customerContactsEmailInput, setCustomerContactsEmailInput]=useState<string>("")
+    const [customerContactsPhoneNumberInput, setCustomerContactsPhoneNumberInput]=useState<string>("")
+    const [customerContactsHomePageURLInput, setCustomerContactsHomePageURLInput]=useState<string>("")
+
     function adAdvertisement() {
         axios.post("/api/ad", [
             {
@@ -50,7 +54,7 @@ export default function AdForm() {
                 "priceCategories": [
                     "PER_HOUR"
                 ],
-                "contacts": [
+                "customerContacts": [
                     {
                         "email": contactsEmailInput,
                         "phoneNumber": contactsPhoneNumberInput,
@@ -143,7 +147,7 @@ export default function AdForm() {
                                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-6">
 
                                         <div className="md:col-span-6">
-                                            <label htmlFor="full_name">Company Name</label>
+                                            <label htmlFor="full_name">Company Name or full Name of Contractor</label>
                                             <input type="text" name="company_name" id="company_name"
                                                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                                    onChange={companyNameHandler}
@@ -175,7 +179,7 @@ export default function AdForm() {
                                                    placeholder=""/>
                                         </div>
                                         <div className="md:col-span-1">
-                                            <label htmlFor="zipcode">Zipcode</label>
+                                            <label htmlFor="zipcode">Zip Code</label>
                                             <input type="text" name="zipcode" id="zipcode"
                                                    className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                                    placeholder=""
@@ -191,7 +195,7 @@ export default function AdForm() {
                                                    placeholder=""/>
                                         </div>
                                         <div className="md:col-span-3">
-                                            <label htmlFor="state">State / province</label>
+                                            <label htmlFor="state">State / Province</label>
                                             <div
                                                 className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                                                 <input name="state" id="state" placeholder="State"
@@ -301,7 +305,7 @@ export default function AdForm() {
                 <div className="container max-w-screen-lg mx-auto">
                     <div>
                         <h2 className="font-semibold text-xl text-gray-700">Officail Information</h2>
-                        <p className="text-gray-600 mb-6">Followoing Information will be seen on your advertisement page.</p>
+                        <p className="text-gray-600 mb-6">Followoing information will be seen on your advertisement page.</p>
 
                         <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
                             <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
@@ -333,7 +337,7 @@ export default function AdForm() {
                                             />
                                         </div>
                                         <div className="md:col-span-6">
-                                            <label htmlFor="message">About yourself</label>
+                                            <label htmlFor="message">About Yourself</label>
                                             <textarea id="message"
                                                       rows={4}
                                                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -344,7 +348,7 @@ export default function AdForm() {
                                         </div>
 
                                         <div className="md:col-span-6">
-                                            <label htmlFor="message">Service information in detail</label>
+                                            <label htmlFor="message">Service Information in Detail</label>
                                             <textarea id="message"
                                                       rows={6}
                                                       className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -355,7 +359,7 @@ export default function AdForm() {
                                         </div>
 
                                         <div className="md:col-span-6">
-                                            <p>Add a image to your advertisement</p>
+                                            <p>Add a Image to your Advertisement</p>
                                             <div className="flex items-center justify-center w-full">
                                                 <label htmlFor="dropzone-file"
                                                        className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-400 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -421,7 +425,6 @@ export default function AdForm() {
                                             <label htmlFor="address">Street</label>
                                             <input type="text" name="address" id="address"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
                                                    placeholder=""/>
                                         </div>
                                         <div className="md:col-span-2">
