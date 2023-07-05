@@ -8,6 +8,7 @@ export default function AdForm() {
 
 
     const [companyNameInput, setCompanyNameInput]=useState<string>("")
+
     const [companyAddressStreetNameInput, setCompanyAddressStreetNameInput]=useState<string>("")
     const [companyAddressStreetNoInput, setCompanyAddressStreetNoInput]=useState<string>("")
     const [companyAddressCompartmentInput, setCompanyAddressCompartmentInput]=useState<string>("")
@@ -15,17 +16,26 @@ export default function AdForm() {
     const [companyAddressCityInput, setCompanyAddressCityInput]=useState<string>("")
     const [companyAddressStateInput, setCompanyAddressStateInput]=useState<string>("")
     const [companyAddressCountryInput, setCompanyAddressCountryInput]=useState<string>("")
+
     const [contactsEmailInput, setContactsEmailInput]=useState<string>("")
     const [contactsPhoneNumberInput, setContactsPhoneNumberInput]=useState<string>("")
     const [contactsHomePageURLInput, setContactsHomePageURLInput]=useState<string>("")
+
     const [businessCategoryInput, setBusinessCategoryInput]=useState<string>("")
     const [titleInput, setTitleInput]=useState<string>("")
     const [aboutYourselfInput, setAboutYourselfInputInput]=useState<string>("")
     const [detailInformationForServiceInput, setDetailInformationForServiceInput]=useState<string>("")
+
     const [customerContactsEmailInput, setCustomerContactsEmailInput]=useState<string>("")
     const [customerContactsPhoneNumberInput, setCustomerContactsPhoneNumberInput]=useState<string>("")
     const [customerContactsHomePageURLInput, setCustomerContactsHomePageURLInput]=useState<string>("")
 
+    const [shopLocationStreetNameInput, setShopLocationStreetNameInput]=useState<string>("")
+    const [shopLocationStreetNoInput, setShopLocationStreetNoInput]=useState<string>("")
+    const [shopLocationZipCodeInput, setShopLocationZipCodeInput]=useState<string>("")
+    const [shopLocationCityInput, setShopLocationCityInput]=useState<string>("")
+    const [shopLocationStateInput, setShopLocationStateInput]=useState<string>("")
+    const [shopLocationCountryInput, setShopLocationCountryInput]=useState<string>("")
     function adAdvertisement() {
         axios.post("/api/ad", [
             {
@@ -39,6 +49,11 @@ export default function AdForm() {
                     "city": companyAddressCityInput,
                     "country": companyAddressStateInput,
                     "geoData": companyAddressCountryInput
+                },
+                "contacts": {
+                    "email": contactsEmailInput,
+                    "phoneNumber": contactsPhoneNumberInput,
+                    "homepageURL": contactsHomePageURLInput
                 }
             },
                 "businessCategories": [
@@ -56,20 +71,18 @@ export default function AdForm() {
                 ],
                 "customerContacts": [
                     {
-                        "email": contactsEmailInput,
-                        "phoneNumber": contactsPhoneNumberInput,
-                        "homepageURL": businessCategoryInput
+                        "email": customerContactsEmailInput,
+                        "phoneNumber": customerContactsPhoneNumberInput,
+                        "homepageURL": customerContactsHomePageURLInput
                     }
                 ],
                 "locations": [
                     {
-                        "streetName": "string",
-                        "houseNo": "string",
-                        "apartment": "string",
-                        "zipCode": "string",
-                        "city": "string",
-                        "country": "string",
-                        "geoData": "string"
+                        "streetName": shopLocationStreetNameInput,
+                        "houseNo": shopLocationStreetNoInput,
+                        "zipCode": shopLocationZipCodeInput,
+                        "city": shopLocationCityInput,
+                        "country": shopLocationCountryInput
                     }
                 ],
                 "personsID": "string"
@@ -114,6 +127,8 @@ export default function AdForm() {
     };
 
 
+
+
     function businessCategoryHandler(event: ChangeEvent<HTMLInputElement>) {
         setBusinessCategoryInput(event.target.value)
     };
@@ -127,6 +142,35 @@ export default function AdForm() {
         setDetailInformationForServiceInput(event.target.value)
     }
 
+    function customerContactsEmailHandler(event: ChangeEvent<HTMLInputElement>) {
+        setCustomerContactsEmailInput(event.target.value)
+    };
+    function customerContactsPhoneNumberHandler(event: ChangeEvent<HTMLInputElement>) {
+        setCustomerContactsPhoneNumberInput(event.target.value)
+    };
+    function customerContactsHomePageURLHandler(event: ChangeEvent<HTMLInputElement>) {
+        setCustomerContactsHomePageURLInput(event.target.value)
+    };
+
+
+    function shopLocationStreetNameHandler(event: ChangeEvent<HTMLInputElement>){
+        setShopLocationStreetNameInput(event.target.value)
+    };
+    function shopLocationStreetNoHandler(event: ChangeEvent<HTMLInputElement>){
+        setShopLocationStreetNoInput(event.target.value)
+    };
+    function shopLocationZipCodeHandler(event: ChangeEvent<HTMLInputElement>) {
+        setShopLocationZipCodeInput(event.target.value)
+    };
+    function shopLocationCityHandler(event: ChangeEvent<HTMLInputElement>) {
+        setShopLocationCityInput(event.target.value)
+    };
+    function shopLocationStateHandler(event: ChangeEvent<HTMLInputElement>) {
+        setShopLocationStateInput(event.target.value)
+    };
+    function shopLocationCountryHandler(event: ChangeEvent<HTMLInputElement>) {
+        setShopLocationCountryInput(event.target.value)
+    };
 
 
     return (
@@ -378,10 +422,6 @@ export default function AdForm() {
                                                 </label>
                                             </div>
                                         </div>
-
-
-
-
                                     </div>
                                 </div>
                                 <div className="text-gray-600">
@@ -395,22 +435,28 @@ export default function AdForm() {
                                             <label htmlFor="email">Email Address</label>
                                             <input type="email" id="email"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
-                                                   placeholder="max.example@company.com" required/>
+                                                   placeholder="max.example@company.com"
+                                                   onChange={customerContactsEmailHandler}
+                                                   value={customerContactsEmailInput}
+                                            />
                                         </div>
                                         <div className="md:col-span-3">
                                             <label htmlFor="phone" >Phone Number</label>
                                             <input type="tel" id="phone"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
-                                                   placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required/>
+                                                   placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                                                   onChange={customerContactsPhoneNumberHandler}
+                                                   value={customerContactsPhoneNumberInput}
+                                            />
                                         </div>
                                         <div className="md:col-span-6">
                                             <label htmlFor="website">Website URL</label>
                                             <input type="url" id="website"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
-                                                   placeholder="url.com" required/>
+                                                   placeholder="url.com"
+                                                   onChange={customerContactsHomePageURLHandler}
+                                                   value={customerContactsHomePageURLInput}
+                                            />
                                         </div>
 
                                     </div>
@@ -422,43 +468,50 @@ export default function AdForm() {
                                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-6">
 
                                         <div className="md:col-span-4">
-                                            <label htmlFor="address">Street</label>
-                                            <input type="text" name="address" id="address"
+                                            <label htmlFor="shopLocationAddress">Street</label>
+                                            <input type="text" name="shopLocationAddress" id="shopLocationAddress"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                   placeholder=""/>
+                                                   placeholder=""
+                                                   onChange={shopLocationStreetNameHandler}
+                                                   value={shopLocationStreetNameInput}
+                                            />
                                         </div>
                                         <div className="md:col-span-2">
-                                            <label htmlFor="address">No.</label>
-                                            <input type="text" name="address" id="address"
+                                            <label htmlFor="shopLocationAddressNo"> No.</label>
+                                            <input type="text" name="shopLocationAddressNo" id="shopLocationAddressNo"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
-                                                   placeholder=""/>
+                                                   placeholder=""
+                                                   onChange={shopLocationStreetNoHandler}
+                                                   value={shopLocationStreetNoInput}
+                                            />
                                         </div>
 
                                         <div className="md:col-span-1">
-                                            <label htmlFor="zipcode">Zipcode</label>
-                                            <input type="text" name="zipcode" id="zipcode"
+                                            <label htmlFor="shopLocationZipcode">Zip Code </label>
+                                            <input type="text" name="shopLocationZipcode" id="shopLocationZipcode"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
-                                                   placeholder="" value=""/>
+                                                   placeholder=""
+                                                   onChange={shopLocationZipCodeHandler}
+                                                   value={shopLocationZipCodeInput}
+                                            />
                                         </div>
                                         <div className="md:col-span-2">
-                                            <label htmlFor="city">City</label>
-                                            <input type="text" name="city" id="city"
+                                            <label htmlFor="shopLocationCity">City</label>
+                                            <input type="text" name="shopLocationCity" id="shopLocationCity"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                   value=""
+                                                   onChange={shopLocationCityHandler}
+                                                   value={shopLocationCityInput}
                                                    placeholder=""/>
                                         </div>
                                         <div className="md:col-span-3">
-                                            <label htmlFor="state">State / province</label>
+                                            <label htmlFor="shopLocationState">State / Province</label>
                                             <div
-
                                                 className=" flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-
                                             >
-                                                <input name="state" id="state" placeholder="State"
+                                                <input name="shopLocationState" id="shopLocationState" placeholder="State"
                                                        className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                                                       value=""/>
+                                                       onChange={shopLocationStateHandler}
+                                                       value={shopLocationStateInput}/>
                                                 <button
                                                     className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
                                                     <svg className="w-4 h-4 mx-2 fill-current"
@@ -481,13 +534,15 @@ export default function AdForm() {
                                             </div>
                                         </div>
                                         <div className="md:col-span-3">
-                                            <label htmlFor="country">Country / region</label>
+                                            <label htmlFor="shopLocationCountry">Country / region</label>
                                             <div
                                                 className="flex bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             >
-                                                <input name="country" id="country" placeholder="Country"
+                                                <input name="shopLocationCountry" id="shopLocationCountry" placeholder="Country"
                                                        className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                                                       value=""/>
+                                                       onChange={shopLocationCountryHandler}
+                                                       value={shopLocationCountryInput}
+                                                />
                                                 <button
                                                     className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
                                                     <svg className="w-4 h-4 mx-2 fill-current"
