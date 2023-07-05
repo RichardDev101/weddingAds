@@ -34,6 +34,18 @@ class AdControllerTest {
                                "company": {
                                  "name": "Picture Limited",
                                  "address": {
+                                   "streetName": "Main Street",
+                                   "houseNo": "10",
+                                   "apartment": "",
+                                   "zipCode": "12345",
+                                   "city": "Cityville",
+                                   "country": "Countryland",
+                                   "geoData": ""
+                                 },
+                                 "contacts": {
+                                   "email": "",
+                                   "phoneNumber": "",
+                                   "homepageURL": ""
                                  }
                                },
                                "businessCategories": [
@@ -49,7 +61,7 @@ class AdControllerTest {
                                "priceCategories": [
                                  "PER_HOUR"
                                ],
-                               "contacts": [
+                               "customerContacts": [
                                  {
                                    "email": "string",
                                    "phoneNumber": "string",
@@ -58,9 +70,14 @@ class AdControllerTest {
                                ],
                                "locations": [
                                  {
+                                   "streetName": "Main Street",
+                                   "houseNo": "10",
+                                   "zipCode": "12345",
+                                   "city": "Cityville",
+                                   "country": "Countryland"
                                  }
                                ],
-                               "personsID": "123456"
+                                "personsID": "123456"
                              }
                                 """)
                                 .with(csrf()))
@@ -70,12 +87,24 @@ class AdControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                         [
-                        {
+                            {
                                "advertisementStatus": "NEW",
                                "paymentCategory": "BASIC",
                                "company": {
                                  "name": "Picture Limited",
                                  "address": {
+                                   "streetName": "Main Street",
+                                   "houseNo": "10",
+                                   "apartment": "",
+                                   "zipCode": "12345",
+                                   "city": "Cityville",
+                                   "country": "Countryland",
+                                   "geoData": ""
+                                 },
+                                 "contacts": {
+                                   "email": "",
+                                   "phoneNumber": "",
+                                   "homepageURL": ""
                                  }
                                },
                                "businessCategories": [
@@ -91,7 +120,7 @@ class AdControllerTest {
                                "priceCategories": [
                                  "PER_HOUR"
                                ],
-                               "contacts": [
+                               "customerContacts": [
                                  {
                                    "email": "string",
                                    "phoneNumber": "string",
@@ -100,9 +129,14 @@ class AdControllerTest {
                                ],
                                "locations": [
                                  {
+                                   "streetName": "Main Street",
+                                   "houseNo": "10",
+                                   "zipCode": "12345",
+                                   "city": "Cityville",
+                                   "country": "Countryland"
                                  }
                                ],
-                               "personsID": "123456"
+                              "personsID": "123456"
                              }
                              ]
                         """))
