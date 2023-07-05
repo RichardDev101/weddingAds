@@ -1,13 +1,20 @@
 import React from 'react';
 import {AiOutlineMenu} from "react-icons/ai";
 import Avatar from "../Avatar";
+import {useNavigate} from "react-router-dom";
 
 
 export default function UserMenu() {
+    const navigate = useNavigate();
+    function goToAdFormPage() {
+        navigate("/adding")
+    }
+
     return (
         <div className="relative">
             <div className="flex flex-row items-center gap-3">
-                <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
+                <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+                onClick={goToAdFormPage}>
                     Offer your Service
                 </div>
                 <div

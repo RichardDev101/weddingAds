@@ -7,7 +7,6 @@ public enum BusinessCategory {
     DRESSES,
     SUITS,
     HAIR_DRESSER,
-    BRIDAL_SALON,
     DECOR_LIGHTNING,
     DJ,
     MUSICIAN,
@@ -24,5 +23,6 @@ public enum BusinessCategory {
     WEDDING_PLANNER,
     INVITATION_PAPER_GOODS,
     BAR_SERVICE,
-    ENTERTAINMENT
+    ENTERTAINMENT,
+    RESTAURANT
 }
