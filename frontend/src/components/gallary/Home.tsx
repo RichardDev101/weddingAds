@@ -18,8 +18,8 @@ export default function Home() {
 
     return (
         <Container>
-            <div className="pb-20 pt-28 pt-24g rid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-                <div>
+            <div className="border-solid border-gray-500 rounded-md bg-green-400 w-48 h-12">
+                <div className="">
                     {allAds.map(ad => <AdCard ad={ad}/>)}
                 </div>
             </div>
