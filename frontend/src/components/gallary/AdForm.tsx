@@ -2,19 +2,119 @@ import React, {ChangeEvent, useState} from 'react';
 import {LuFileInput} from "react-icons/lu";
 import axios from "axios";
 import {businessCategories} from "../../enum/BusinessCategory";
+import * as string_decoder from "string_decoder";
 
-function AdForm() {
+export default function AdForm() {
 
     const[titleInput, setTitleInput]=useState<string>("")
+    const[companyNameInput, setCompanyNameInput]=useState<string>("")
+    const [companyAddressStreetNameInput, setCompanyAddressStreetNameInput]=useState<string>("")
+    const [companyAddressStreetNoInput, setCompanyAddressStreetNoInput]=useState<string>("")
+    const [companyAddressCompartmentInput, setCompanyAddressCompartmentInput]=useState<string>("")
+    const [companyAddressZipCodeInput, setCompanyAddressZipCodeInput]=useState<string>("")
+    const [companyAddressCityInput, setCompanyAddressCityInput]=useState<string>("")
+    const [companyAddressStateInput, setCompanyAddressStateInput]=useState<string>("")
+    const [companyAddressCountryInput, setCompanyAddressCountryInput]=useState<string>("")
+    const [contactsEmailInput, setContactsEmailInput]=useState<string>("")
+    const [contactsPhoneNumberInput, setContactsPhoneNumberInput]=useState<string>("")
+    const [contactsHomePageURLInput, setContactsHomePageURLInput]=useState<string>("")
+    const [businessCategoryInput, setBusinessCategoryInput]=useState<string>("")
     function adAdvertisement() {
-        axios.post("/api/ad", {
-            title:titleInput,
-        }).then(response=>console.log(response.data))
+        axios.post("/api/ad", [
+            {
+            "company": {
+                "name": companyNameInput,
+                "address": {
+                    "streetName": companyAddressStreetNameInput,
+                    "houseNo": companyAddressStreetNoInput,
+                    "apartment": companyAddressCompartmentInput,
+                    "zipCode": companyAddressZipCodeInput,
+                    "city": companyAddressCityInput,
+                    "country": companyAddressStateInput,
+                    "geoData": companyAddressCountryInput
+                }
+            },
+                "businessCategories": [
+                    businessCategoryInput
+                ],
+                "photosID": [
+                    "string"
+                ],
+                "title": "string",
+                "aboutYourself": "string",
+                "detailInformationForService": "string",
+                "averagePrice": 0,
+                "priceCategories": [
+                    "PER_HOUR"
+                ],
+                "contacts": [
+                    {
+                        "email": contactsEmailInput,
+                        "phoneNumber": contactsPhoneNumberInput,
+                        "homepageURL": businessCategoryInput
+                    }
+                ],
+                "locations": [
+                    {
+                        "streetName": "string",
+                        "houseNo": "string",
+                        "apartment": "string",
+                        "zipCode": "string",
+                        "city": "string",
+                        "country": "string",
+                        "geoData": "string"
+                    }
+                ],
+                "personsID": "string"
+            }
+            ]
+        ).then(response=>console.log(response.data))
     }
 
-    function onChangeHandler(event: ChangeEvent<HTMLInputElement>) {
+    function companyNameHandler(event: ChangeEvent<HTMLInputElement>){
+        setCompanyNameInput(event.target.value)
+    };
+    function companyAddressStreetNameHandler(event: ChangeEvent<HTMLInputElement>){
+            setCompanyAddressStreetNameInput(event.target.value)
+        };
+    function companyAddressStreetNoHandler(event: ChangeEvent<HTMLInputElement>){
+            setCompanyAddressStreetNoInput(event.target.value)
+        };
+    function companyAddressCompartmentHandler(event: ChangeEvent<HTMLInputElement>) {
+        setCompanyAddressCompartmentInput(event.target.value)
+    };
+    function companyAddressZipCodeHandler(event: ChangeEvent<HTMLInputElement>) {
+        setCompanyAddressZipCodeInput(event.target.value)
+    };
+    function companyAddressCityHandler(event: ChangeEvent<HTMLInputElement>) {
+        setCompanyAddressCityInput(event.target.value)
+    };
+    function companyAddressStateHandler(event: ChangeEvent<HTMLInputElement>) {
+        setCompanyAddressStateInput(event.target.value)
+    };
+    function companyAddressCountryHandler(event: ChangeEvent<HTMLInputElement>) {
+        setCompanyAddressCountryInput(event.target.value)
+    };
+
+    function contactsEmailHandler(event: ChangeEvent<HTMLInputElement>) {
+        setContactsEmailInput(event.target.value)
+    };
+    function contactsPhoneNumberHandler(event: ChangeEvent<HTMLInputElement>) {
+        setContactsPhoneNumberInput(event.target.value)
+    };
+    function contactsHomePageURLHandler(event: ChangeEvent<HTMLInputElement>) {
+        setContactsHomePageURLInput(event.target.value)
+    };
+
+
+    function businessCategoryHandler(event: ChangeEvent<HTMLInputElement>) {
+        setBusinessCategoryInput(event.target.value)
+    };
+    function titleHandler(event: ChangeEvent<HTMLInputElement>) {
         setTitleInput(event.target.value)
     }
+
+
 
     return (
         <>
@@ -36,37 +136,49 @@ function AdForm() {
                                         <div className="md:col-span-6">
                                             <label htmlFor="full_name">Company Name</label>
                                             <input type="text" name="company_name" id="company_name"
-                                                   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""/>
+                                                   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                                   onChange={companyNameHandler}
+                                                   value={companyNameInput}/>
                                         </div>
 
                                         <div className="md:col-span-4">
                                             <label htmlFor="address">Street</label>
                                             <input type="text" name="address" id="address"
-                                                   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                                   onChange={companyAddressStreetNameHandler}
+                                                   value={companyAddressStreetNameInput}
                                                    placeholder=""/>
                                         </div>
                                         <div className="md:col-span-1">
                                             <label htmlFor="address">No.</label>
                                             <input type="text" name="address" id="address"
-                                                   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                                   onChange={companyAddressStreetNoHandler}
+                                                   value={companyAddressStreetNoInput}
                                                    placeholder=""/>
                                         </div>
                                         <div className="md:col-span-1">
-                                            <label htmlFor="address">Apartment</label>
+                                            <label htmlFor="address">Compartment</label>
                                             <input type="text" name="address" id="address"
-                                                   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                                   onChange={companyAddressCompartmentHandler}
+                                                   value={companyAddressCompartmentInput}
                                                    placeholder=""/>
                                         </div>
                                         <div className="md:col-span-1">
                                             <label htmlFor="zipcode">Zipcode</label>
                                             <input type="text" name="zipcode" id="zipcode"
                                                    className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                                   placeholder="" value=""/>
+                                                   placeholder=""
+                                                   onChange={companyAddressZipCodeHandler}
+                                                   value={companyAddressZipCodeInput}/>
                                         </div>
                                         <div className="md:col-span-2">
                                             <label htmlFor="city">City</label>
                                             <input type="text" name="city" id="city"
-                                                   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                                   onChange={companyAddressCityHandler}
+                                                   value={companyAddressCityInput}
                                                    placeholder=""/>
                                         </div>
                                         <div className="md:col-span-3">
@@ -75,7 +187,9 @@ function AdForm() {
                                                 className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                                                 <input name="state" id="state" placeholder="State"
                                                        className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                                                       value=""/>
+                                                       onChange={companyAddressStateHandler}
+                                                       value={companyAddressStateInput}
+                                                />
                                                 <button
                                                     className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
                                                     <svg className="w-4 h-4 mx-2 fill-current"
@@ -103,7 +217,9 @@ function AdForm() {
                                                 className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                                                 <input name="country" id="country" placeholder="Country"
                                                        className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                                                       value=""/>
+                                                       onChange={companyAddressCountryHandler}
+                                                       value={companyAddressCountryInput}
+                                                />
                                                 <button
                                                         className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
                                                     <svg className="w-4 h-4 mx-2 fill-current"
@@ -140,19 +256,29 @@ function AdForm() {
                                             <label htmlFor="email">Email Address</label>
                                             <input type="email" id="email"
                                                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                                   placeholder="max.example@company.com" required/>
+                                                   placeholder="max.example@company.com" required
+                                                   onChange={contactsEmailHandler}
+                                                   value={contactsEmailInput}
+                                            />
                                         </div>
                                         <div className="md:col-span-3">
                                             <label htmlFor="phone" >Phone Number</label>
                                             <input type="tel" id="phone"
                                                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                                   placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required/>
+                                                   placeholder="123-45-678"
+                                                   pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                                                   onChange={contactsPhoneNumberHandler}
+                                                   value={contactsPhoneNumberInput}
+                                            />
                                         </div>
                                         <div className="md:col-span-6">
                                             <label htmlFor="website">Website URL</label>
                                             <input type="url" id="website"
                                                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                                   placeholder="url.com" required/>
+                                                   placeholder="url.com"
+                                                   onChange={contactsHomePageURLHandler}
+                                                   value={contactsHomePageURLInput}
+                                            />
                                         </div>
 
                                     </div>
@@ -162,7 +288,6 @@ function AdForm() {
                     </div>
                 </div>
             </div>
-
             <div className="bg-gray-100 flex items-center justify-center">
                 <div className="container max-w-screen-lg mx-auto">
                     <div>
@@ -182,7 +307,10 @@ function AdForm() {
                                             <label htmlFor="company">Business Category</label>
                                             <input type="text" id="company"
                                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                   placeholder="Limited" required/>
+                                                   placeholder="Limited" required
+                                                   onChange={businessCategoryHandler}
+                                                   value={businessCategoryInput}
+                                            />
                                         </div>
                                         <div className="md:col-span-4">
                                             <label htmlFor="helper-text">Title for your Advertisement</label>
@@ -191,7 +319,7 @@ function AdForm() {
                                                    aria-describedby="helper-text-explanation"
                                                    placeholder="Choose a short titel for your advertisement"
                                                    value={titleInput}
-                                                   onChange={onChangeHandler}
+                                                   onChange={titleHandler}
                                             />
                                         </div>
                                         <div className="md:col-span-6">
@@ -228,8 +356,7 @@ function AdForm() {
                                                         </svg>
                                                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or
                                                             drag and drop</p>
-                                                        <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
-                                                            800x400px)</p>
+                                                        <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                                                     </div>
                                                     <input id="dropzone-file" type="file" className="hidden"/>
                                                 </label>
@@ -421,140 +548,6 @@ function AdForm() {
                     </div>
                 </div>
             </div>
-        <div className="pt-24 max-w-screen-sm rounded-lg p-6 dark:bg-neutral-500">
-            <form>
-                <div>
-                    <label htmlFor="helper-text"
-                           className="pt-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title for the advertisement</label>
-                    <input type="text"
-                           aria-describedby="helper-text-explanation"
-
-                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Choose a short titel for your advertisement"
-                           value={titleInput}
-                           onChange={onChangeHandler}
-                    />
-                </div>
-                <div>
-                    <h1 className="pt-3 pb-3 text-yellow-500 italic">
-                        Information which will be shown on you advertisement page:
-                    </h1>
-                    <label htmlFor="company"
-                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
-                    <input type="text" id="company"
-                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Limited" required/>
-                </div>
-                <div>
-                    <label htmlFor="message"
-                           className="pt-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >About yourself</label>
-                    <textarea id="message"
-                              rows={4}
-                              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="Write something about yourself"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="message"
-                           className="pt-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >Service information in detail</label>
-                    <textarea id="message"
-                              rows={6}
-                              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              placeholder="Write something about your service"
-                    />
-                </div>
-                <div>
-                    <p className="pt-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Add a image to your advertisement</p>
-                    <div className="flex items-center justify-center w-full">
-                        <label htmlFor="dropzone-file"
-                               className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-
-                            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg aria-hidden="true" className="w-10 h-10 mb-3 text-gray-400" fill="none"
-                                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                                </svg>
-                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or
-                                    drag and drop</p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX.
-                                    800x400px)</p>
-                            </div>
-                            <input id="dropzone-file" type="file" className="hidden"/>
-                        </label>
-                    </div>
-                </div>
-
-                <div className="pt-5 grid gap-6 mb-6 md:grid-cols-2">
-                    <div>
-                        <label htmlFor="first_name"
-                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
-                            name</label>
-                        <input type="text" id="first_name"
-                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="Max" required/>
-                    </div>
-                    <div>
-                        <label htmlFor="last_name"
-                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
-                            name</label>
-                        <input type="text" id="last_name"
-                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="Example" required/>
-                    </div>
-
-
-                    <div>
-                        <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone
-                            number</label>
-                        <input type="tel" id="phone"
-                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required/>
-                    </div>
-
-                    <div>
-                        <label htmlFor="website"
-                               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Website
-                            URL</label>
-                        <input type="url" id="website"
-                               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                               placeholder="url.com" required/>
-                    </div>
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
-                        address</label>
-                    <input type="email" id="email"
-                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="max.example@company.com" required/>
-                </div>
-                <div className="mb-6">
-                    <label htmlFor="password"
-                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                    <input type="password" id="password"
-                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="•••••••••" required/>
-                </div>
-                <div className="flex items-start mb-6">
-                    <div className="flex items-center h-5">
-                        <input id="remember" type="checkbox" value=""
-                               className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                               required/>
-                    </div>
-                    <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I
-                        agree with the <a href="#" className="text-blue-600 hover:underline dark:text-blue-500">terms
-                            and conditions</a>.</label>
-                </div>
-                <button type="submit"
-                        onClick={adAdvertisement}
-                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit
-                </button>
-            </form>
-        </div>
         </>
     );
 }
-
-export default AdForm;
