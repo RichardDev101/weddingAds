@@ -4,7 +4,6 @@ import {businessCategories} from "../../enum/BusinessCategory";
 
 export default function AdForm() {
 
-
     const [companyNameInput, setCompanyNameInput]=useState<string>("")
 
     const [companyAddressStreetNameInput, setCompanyAddressStreetNameInput]=useState<string>("")
