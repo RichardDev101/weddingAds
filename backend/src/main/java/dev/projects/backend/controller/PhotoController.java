@@ -22,8 +22,15 @@ public class PhotoController {
     private final PhotoService photoService;
 
     @PostMapping
-    public String addPhoto(@RequestParam("image") MultipartFile  image) throws IOException {
-       return photoService.addPhoto(image.getOriginalFilename(),image);
+    public ResponseEntity<String> addPhoto(@RequestParam("image") MultipartFile  image) throws IOException {
+        try {
+            String filename = photoService.addPhoto(image.getOriginalFilename(), image);
+            return ResponseEntity
+                    .ok()
+                    .body(filename);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add photo");
+        }
     }
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> downloadPhoto(@PathVariable String id){

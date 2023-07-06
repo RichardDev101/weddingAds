@@ -34,6 +34,8 @@ export default function AdForm() {
     const [shopLocationStateInput, setShopLocationStateInput]=useState<string>("")
     const [shopLocationCountryInput, setShopLocationCountryInput]=useState<string>("")
 
+    const [selectedImage, setSelectedImage]=useState<File | null> (null)
+
     function adAdvertisement() {
         const advertisementData = {
             company: {
@@ -163,6 +165,12 @@ export default function AdForm() {
         setShopLocationCountryInput(event.target.value)
     };
 
+    function imageUploadHandler (event: React.ChangeEvent<HTMLInputElement>) {
+        const file = event.target.files?.[0];
+        if (file) {
+            setSelectedImage(file);
+        }
+    }
 
     return (
         <>
@@ -380,8 +388,20 @@ export default function AdForm() {
                                                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or
                                                             drag and drop</p>
                                                         <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                                        {selectedImage && (
+                                                            <div className="flex items-center justify-center">
+                                                                <img
+                                                                    src={URL.createObjectURL(selectedImage)}
+                                                                    alt="Selected Image"
+                                                                    className="max-w-auto max-h-32"
+                                                                />
+                                                            </div>
+                                                        )}
                                                     </div>
-                                                    <input id="dropzone-file" type="file" className="hidden"/>
+                                                    <input  id="dropzone-file" type="file" className="hidden"
+                                                            onChange={imageUploadHandler}
+                                                    />
+
                                                 </label>
                                             </div>
                                         </div>
