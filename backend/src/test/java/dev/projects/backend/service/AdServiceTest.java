@@ -70,26 +70,34 @@ class AdServiceTest {
         verify(adRepository).findById(id);
     }
 
+
     @Test
     void testUpdateAd_ShouldUpdateAdvertisementAndReturnId() {
         // ARRANGE
-        String id = "3423352";
+        String id = "21245";
+        String originalTitle = "Das ist der original Titel";
         Advertisement originalAdvertisement = new Advertisement();
         originalAdvertisement.setId(id);
+        originalAdvertisement.setTitle(originalTitle);
 
-        String updatedId= "updatedId3423352";
+        String updatedTitle = "Das ist der neue Titel";
+        AdvertisementDTO updatedAdvertisementDTO = new AdvertisementDTO();
+        updatedAdvertisementDTO.setTitle(updatedTitle);
+
         Advertisement updatedAdvertisement = new Advertisement();
-        updatedAdvertisement.setId(updatedId);
+        updatedAdvertisement.setId(id);
+        updatedAdvertisement.setTitle(updatedTitle);
 
         when(adRepository.findById(id)).thenReturn(Optional.of(originalAdvertisement));
-        when(adRepository.save(updatedAdvertisement)).thenReturn(updatedAdvertisement);
+        when(adRepository.save(any(Advertisement.class))).thenReturn(updatedAdvertisement);
         // ACT
-        String result = adService.updateAd(updatedAdvertisement, id);
+        String result = adService.updateAd(updatedAdvertisementDTO, id);
 
         // ASSERT
         verify(adRepository).findById(id);
-        verify(adRepository).save(updatedAdvertisement);
-        assertEquals(updatedId, result);
+        verify(adRepository).save(any(Advertisement.class));
+        assertEquals(id, result);
+        assertEquals(updatedTitle, updatedAdvertisement.getTitle());
     }
 
 }

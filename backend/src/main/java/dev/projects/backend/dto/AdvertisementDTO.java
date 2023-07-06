@@ -10,7 +10,6 @@ import dev.projects.backend.model.ContactDetail;
 import lombok.Data;
 
 import java.util.List;
-
 @Data
 public class AdvertisementDTO {
 

@@ -31,22 +31,6 @@ public class AdController {
 
     @PutMapping("{id}")
     public String update(@RequestBody AdvertisementDTO ad, @PathVariable String id){
-        Advertisement updateAd = Advertisement.builder()
-                .id(id)
-                .advertisementStatus(ad.getAdvertisementStatus())
-                .paymentCategory(ad.getPaymentCategory())
-                .company(ad.getCompany())
-                .businessCategories(ad.getBusinessCategories())
-                .photosID(ad.getPhotosID())
-                .title(ad.getTitle())
-                .aboutYourself(ad.getAboutYourself())
-                .detailInformationForService(ad.getDetailInformationForService())
-                .averagePrice(ad.getAveragePrice())
-                .priceCategories(ad.getPriceCategories())
-                .customerContacts(ad.getCustomerContacts())
-                .locations(ad.getLocations())
-                .personsID(ad.getPersonsID())
-                .build();
-        return adService.updateAd(updateAd, id);
+        return adService.updateAd(ad, id);
     }
 }

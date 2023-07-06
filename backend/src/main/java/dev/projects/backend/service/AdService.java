@@ -48,12 +48,28 @@ public class AdService {
             throw new NoSuchElementException();
         }
     }
-    public String updateAd(Advertisement advertisement, String id) {
+    public String updateAd(AdvertisementDTO ad, String id) {
         Optional<Advertisement> optionalAdvertisement = adRepository.findById(id);
         if(optionalAdvertisement.isEmpty()){
             throw new NoSuchElementException();
         }else {
-            return adRepository.save(advertisement).getId();
+            Advertisement updatedAd = Advertisement.builder()
+                    .id(id)
+                    .advertisementStatus(ad.getAdvertisementStatus())
+                    .paymentCategory(ad.getPaymentCategory())
+                    .company(ad.getCompany())
+                    .businessCategories(ad.getBusinessCategories())
+                    .photosID(ad.getPhotosID())
+                    .title(ad.getTitle())
+                    .aboutYourself(ad.getAboutYourself())
+                    .detailInformationForService(ad.getDetailInformationForService())
+                    .averagePrice(ad.getAveragePrice())
+                    .priceCategories(ad.getPriceCategories())
+                    .customerContacts(ad.getCustomerContacts())
+                    .locations(ad.getLocations())
+                    .personsID(ad.getPersonsID())
+                    .build();
+            return adRepository.save(updatedAd).getId();
         }
     }
 
