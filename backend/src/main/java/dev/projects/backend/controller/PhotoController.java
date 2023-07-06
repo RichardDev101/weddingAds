@@ -24,10 +24,10 @@ public class PhotoController {
     @PostMapping
     public ResponseEntity<String> addPhoto(@RequestParam("image") MultipartFile  image) throws IOException {
         try {
-            String filename = photoService.addPhoto(image.getOriginalFilename(), image);
+            String fileId = photoService.addPhoto(image.getOriginalFilename(), image);
             return ResponseEntity
                     .ok()
-                    .body(filename);
+                    .body(fileId);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add photo");
         }

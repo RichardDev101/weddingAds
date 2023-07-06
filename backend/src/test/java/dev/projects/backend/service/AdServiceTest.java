@@ -6,8 +6,11 @@ import dev.projects.backend.repository.AdRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class AdServiceTest {
@@ -41,6 +44,52 @@ class AdServiceTest {
         // ASSERT
         verify(adRepository).findAll();
         assertEquals(actual, expected);
+    }
+
+    @Test
+    void testGetAdWithId_ExistingId_ReturnsAdvertisement() {
+        // ARRANGE
+        String id = "4645";
+        Advertisement expectedAd = new Advertisement();
+        expectedAd.setId(id);
+        when(adRepository.findById(id)).thenReturn(Optional.of(expectedAd));
+        // ACT
+        Advertisement actualAd = adService.getAdWithId(id);
+        // ASSERT
+        assertEquals(expectedAd, actualAd);
+        verify(adRepository).findById(id);
+    }
+    @Test
+    void testGetAdWithId_NonExistingId_ThrowsNoSuchElementException() {
+        // Arrange
+        String id = "65487";
+        when(adRepository.findById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(NoSuchElementException.class, () -> adService.getAdWithId(id));
+        verify(adRepository).findById(id);
+    }
+
+    @Test
+    void testUpdateAd_ShouldUpdateAdvertisementAndReturnId() {
+        // ARRANGE
+        String id = "3423352";
+        Advertisement originalAdvertisement = new Advertisement();
+        originalAdvertisement.setId(id);
+
+        String updatedId= "updatedId3423352";
+        Advertisement updatedAdvertisement = new Advertisement();
+        updatedAdvertisement.setId(updatedId);
+
+        when(adRepository.findById(id)).thenReturn(Optional.of(originalAdvertisement));
+        when(adRepository.save(updatedAdvertisement)).thenReturn(updatedAdvertisement);
+        // ACT
+        String result = adService.updateAd(updatedAdvertisement, id);
+
+        // ASSERT
+        verify(adRepository).findById(id);
+        verify(adRepository).save(updatedAdvertisement);
+        assertEquals(updatedId, result);
     }
 
 }

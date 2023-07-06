@@ -24,5 +24,29 @@ public class AdController {
         return adService.getAllAds();
     }
 
+    @GetMapping("{id}")
+    public Advertisement getAdWithId(@PathVariable String id){
+        return adService.getAdWithId(id);
+    }
 
+    @PutMapping("{id}")
+    public String update(@RequestBody AdvertisementDTO ad, @PathVariable String id){
+        Advertisement updateAd = Advertisement.builder()
+                .id(id)
+                .advertisementStatus(ad.getAdvertisementStatus())
+                .paymentCategory(ad.getPaymentCategory())
+                .company(ad.getCompany())
+                .businessCategories(ad.getBusinessCategories())
+                .photosID(ad.getPhotosID())
+                .title(ad.getTitle())
+                .aboutYourself(ad.getAboutYourself())
+                .detailInformationForService(ad.getDetailInformationForService())
+                .averagePrice(ad.getAveragePrice())
+                .priceCategories(ad.getPriceCategories())
+                .customerContacts(ad.getCustomerContacts())
+                .locations(ad.getLocations())
+                .personsID(ad.getPersonsID())
+                .build();
+        return adService.updateAd(updateAd, id);
+    }
 }
