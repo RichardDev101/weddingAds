@@ -85,64 +85,64 @@ export default function AdForm() {
 
     function companyNameHandler(event: ChangeEvent<HTMLInputElement>){
         setCompanyNameInput(event.target.value)
-    };
+    }
     function companyAddressStreetNameHandler(event: ChangeEvent<HTMLInputElement>){
             setCompanyAddressStreetNameInput(event.target.value)
-        };
+        }
     function companyAddressStreetNoHandler(event: ChangeEvent<HTMLInputElement>){
             setCompanyAddressStreetNoInput(event.target.value)
-        };
+        }
     function companyAddressCompartmentHandler(event: ChangeEvent<HTMLInputElement>) {
         setCompanyAddressCompartmentInput(event.target.value)
-    };
+    }
     function companyAddressZipCodeHandler(event: ChangeEvent<HTMLInputElement>) {
         setCompanyAddressZipCodeInput(event.target.value)
-    };
+    }
     function companyAddressCityHandler(event: ChangeEvent<HTMLInputElement>) {
         setCompanyAddressCityInput(event.target.value)
-    };
+    }
     function companyAddressStateHandler(event: ChangeEvent<HTMLInputElement>) {
         setCompanyAddressStateInput(event.target.value)
-    };
+    }
     function companyAddressCountryHandler(event: ChangeEvent<HTMLInputElement>) {
         setCompanyAddressCountryInput(event.target.value)
-    };
+    }
 
     function contactsEmailHandler(event: ChangeEvent<HTMLInputElement>) {
         setContactsEmailInput(event.target.value)
-    };
+    }
     function contactsPhoneNumberHandler(event: ChangeEvent<HTMLInputElement>) {
         setContactsPhoneNumberInput(event.target.value)
-    };
+    }
     function contactsHomePageURLHandler(event: ChangeEvent<HTMLInputElement>) {
         setContactsHomePageURLInput(event.target.value)
-    };
+    }
 
 
 
 
     function businessCategoryHandler(event: ChangeEvent<HTMLSelectElement>) {
         setBusinessCategoryInput(event.target.value)
-    };
+    }
     function titleHandler(event: ChangeEvent<HTMLInputElement>) {
         setTitleInput(event.target.value)
-    };
+    }
     function aboutYourselfHandler(event: ChangeEvent<HTMLTextAreaElement>) {
         setAboutYourselfInputInput(event.target.value)
-    };
+    }
     function detailInformationForServiceHandler(event: ChangeEvent<HTMLTextAreaElement>) {
         setDetailInformationForServiceInput(event.target.value)
     }
 
     function customerContactsEmailHandler(event: ChangeEvent<HTMLInputElement>) {
         setCustomerContactsEmailInput(event.target.value)
-    };
+    }
     function customerContactsPhoneNumberHandler(event: ChangeEvent<HTMLInputElement>) {
         setCustomerContactsPhoneNumberInput(event.target.value)
-    };
+    }
     function customerContactsHomePageURLHandler(event: ChangeEvent<HTMLInputElement>) {
         setCustomerContactsHomePageURLInput(event.target.value)
-    };
+    }
 
 
     function shopLocationStreetNameHandler(event: ChangeEvent<HTMLInputElement>){
@@ -239,25 +239,7 @@ export default function AdForm() {
                                                        onChange={companyAddressStateHandler}
                                                        value={companyAddressStateInput}
                                                 />
-                                                <button
-                                                    className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
-                                                </button>
-                                                <button
-                                                    className="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <polyline points="18 15 12 9 6 15"></polyline>
-                                                    </svg>
-                                                </button>
+
                                             </div>
                                         </div>
                                         <div className="md:col-span-3">
@@ -269,25 +251,6 @@ export default function AdForm() {
                                                        onChange={companyAddressCountryHandler}
                                                        value={companyAddressCountryInput}
                                                 />
-                                                <button
-                                                        className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
-                                                </button>
-                                                <button
-                                                        className="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <polyline points="18 15 12 9 6 15"></polyline>
-                                                    </svg>
-                                                </button>
                                             </div>
                                         </div>
 
@@ -511,26 +474,8 @@ export default function AdForm() {
                                                 <input name="shopLocationState" id="shopLocationState" placeholder="State"
                                                        className="px-4 appearance-none outline-none text-white w-full bg-transparent"
                                                        onChange={shopLocationStateHandler}
-                                                       value={shopLocationStateInput}/>
-                                                <button
-                                                    className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
-                                                </button>
-                                                <button
-                                                    className="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <polyline points="18 15 12 9 6 15"></polyline>
-                                                    </svg>
-                                                </button>
+                                                       value={shopLocationStateInput}
+                                                />
                                             </div>
                                         </div>
                                         <div className="md:col-span-3">
@@ -543,25 +488,7 @@ export default function AdForm() {
                                                        onChange={shopLocationCountryHandler}
                                                        value={shopLocationCountryInput}
                                                 />
-                                                <button
-                                                    className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
-                                                </button>
-                                                <button
-                                                    className="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                    <svg className="w-4 h-4 mx-2 fill-current"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                         stroke-linejoin="round">
-                                                        <polyline points="18 15 12 9 6 15"></polyline>
-                                                    </svg>
-                                                </button>
+
                                             </div>
                                         </div>
                                     </div>
