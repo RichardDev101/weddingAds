@@ -48,7 +48,7 @@ public class AdService {
             throw new NoSuchElementException();
         }
     }
-    public String updateAd(AdvertisementDTO ad, String id) {
+    public Advertisement updateAd(AdvertisementDTO ad, String id) {
         Optional<Advertisement> optionalAdvertisement = adRepository.findById(id);
         if(optionalAdvertisement.isEmpty()){
             throw new NoSuchElementException();
@@ -69,7 +69,7 @@ public class AdService {
                     .locations(ad.getLocations())
                     .personsID(ad.getPersonsID())
                     .build();
-            return adRepository.save(updatedAd).getId();
+            return adRepository.save(updatedAd);
         }
     }
 

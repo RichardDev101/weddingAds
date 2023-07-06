@@ -91,13 +91,13 @@ class AdServiceTest {
         when(adRepository.findById(id)).thenReturn(Optional.of(originalAdvertisement));
         when(adRepository.save(any(Advertisement.class))).thenReturn(updatedAdvertisement);
         // ACT
-        String result = adService.updateAd(updatedAdvertisementDTO, id);
+        Advertisement result = adService.updateAd(updatedAdvertisementDTO, id);
 
         // ASSERT
         verify(adRepository).findById(id);
         verify(adRepository).save(any(Advertisement.class));
-        assertEquals(id, result);
-        assertEquals(updatedTitle, updatedAdvertisement.getTitle());
+        assertEquals(id, result.getId());
+        assertEquals(updatedTitle, result.getTitle());
     }
 
 }

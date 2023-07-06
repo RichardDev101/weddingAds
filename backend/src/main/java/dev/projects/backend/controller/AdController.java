@@ -30,7 +30,7 @@ public class AdController {
     }
 
     @PutMapping("{id}")
-    public String update(@RequestBody AdvertisementDTO ad, @PathVariable String id){
+    public Advertisement update(@RequestBody AdvertisementDTO ad, @PathVariable String id){
         return adService.updateAd(ad, id);
     }
 }
