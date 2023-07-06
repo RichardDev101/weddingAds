@@ -13,4 +13,5 @@ public class Company {
 
     private String name;
     private Address address;
+    private ContactDetail contacts;
 }

@@ -20,7 +20,7 @@ export type Advertisement={
     detailInformationForService: string,
     averagePrice: number
     priceCategories: PriceCategory,
-    contacts: ContactDetail,
+    customerContacts: ContactDetail,
     locations:Address,
-    personsID: String
+    personsID: string
 }

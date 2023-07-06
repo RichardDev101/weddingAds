@@ -28,7 +28,7 @@ public class AdService {
                 .detailInformationForService(ad.getDetailInformationForService())
                 .averagePrice(ad.getAveragePrice())
                 .priceCategories(ad.getPriceCategories())
-                .contacts(ad.getContacts())
+                .customerContacts(ad.getCustomerContacts())
                 .locations(ad.getLocations())
                 .personsID(ad.getPersonsID())
                 .build();

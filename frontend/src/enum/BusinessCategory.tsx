@@ -1,4 +1,4 @@
-import {MdBakeryDining, MdFlightTakeoff, MdOutlineVilla} from "react-icons/md";
+import {MdBakeryDining, MdFlightTakeoff} from "react-icons/md";
 import {
     GiAmpleDress,
     GiChurch,
@@ -7,7 +7,6 @@ import {
     GiPapers, GiPartyPopper,
     GiPhotoCamera, GiPorcelainVase,
     GiTrumpet,
-    GiWindmill
 } from "react-icons/gi";
 import {ImHeadphones, ImVideoCamera} from "react-icons/im";
 import {FaUserTie} from "react-icons/fa";
@@ -47,32 +46,32 @@ export enum BusinessCategory {
 
 export const businessCategories = [
     {
-        label: 'Photographer',
+        label: 'PHOTOGRAPHER',
         icon: GiPhotoCamera,
         description: '',
     },
     {
-        label: 'Videographer',
+        label: 'VIDEOGRAPHER',
         icon: ImVideoCamera,
         description: '',
     },
     {
-        label: 'Beauty Salon',
+        label: 'BEAUTY_SALON',
         icon: GiLipstick,
         description: ''
     },
     {
-        label: 'Dresses',
+        label: 'DRESSES',
         icon: GiAmpleDress,
         description: ''
     },
     {
-        label: 'Suits',
+        label: 'SUITS',
         icon: FaUserTie,
         description: ''
     },
     {
-        label: 'Hair Dresser',
+        label: 'HAIR_DRESSER',
         icon: BsScissors,
         description: ''
     },

@@ -24,7 +24,7 @@ public class AdvertisementDTO {
     private String detailInformationForService;
     private float averagePrice;
     private List<PriceCategory> priceCategories;
-    private List<ContactDetail> contacts;
+    private List<ContactDetail> customerContacts;
     private List<Address> locations;
     private String personsID;
 }
