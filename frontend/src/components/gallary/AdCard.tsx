@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {Advertisement} from "../../model/Advertisement";
-import {Address} from "../../model/Address";
 import axios from "axios";
 
 type AdProps={
@@ -17,23 +16,26 @@ export default function AdCard(props: AdProps) {
     })
 
     return(
-        <div className='felx border border-gray-300 xs:w-[250px] w-full' >
-            <div className='bg-tertiary rounded-[40px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'>
+        <div className='pt-20'>
+            <div className='border border-gray-300 rounded-[20px] py-5 px-12 flex justify-evenly items-center flex-col'>
                 <img
-                    src={"img"}
-                    alt='Image'
-                    className='w-32 h-32 object-contain'
+                    src={""}
+                    alt='photo'
+                    className='w-40 h-40 object-contain'
                 />
-                <h1 className='text-black text-[20px] font-bold text-center'>
+            </div>
+            <div className='py-2 px-4'>
+                <h1 className='text-black text-[15px]  text-left'>
                     {props.ad.title}
                 </h1>
-                <h2 className='text-black text-[15px] text-center'>
+                <h2 className='text-black text-[12px] text-left text-gray-500'>
                     {props.ad.businessCategories}
                 </h2>
-                <h2 className='text-black text-[15px] text-center'>
-
+                <h2 className='text-black text-[12px] text-left'>
+                    {props.ad.locations.city}
                 </h2>
             </div>
+
         </div>
     );
 }

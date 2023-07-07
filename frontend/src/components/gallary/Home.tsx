@@ -18,8 +18,8 @@ export default function Home() {
 
     return (
         <Container>
-            <div className="mt-20 flex flex-col flex-row">
-                <div className="">
+            <div>
+                <div className="flex flex-wrap gap-10">
                     {allAds.map(ad => <AdCard ad={ad} key={ad.id} />)}
                 </div>
             </div>
