@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Advertisement} from "../../model/Advertisement";
 import axios from "axios";
 
@@ -7,21 +7,31 @@ type AdProps={
 }
 export default function AdCard(props: AdProps) {
 
+    const [imageSrc, setImageSrc] = useState('');
+
     useEffect(()=> {
-        axios.get("/api/photo/show/"+props.ad.photosID)
+        axios.get("/api/photo/show/" + props.ad.photosID, { responseType: 'arraybuffer' })
             .then(response => {
-                console.log(response.data);
-            })
-            .catch((e) => console.error("Image not found to update advertisement",e))
-    })
+                const base64Image = btoa(
+                    new Uint8Array(response.data).reduce(
+                        (data, byte) => data + String.fromCharCode(byte),
+                        ''
+                    )
+                );
+                setImageSrc(`data:image/jpeg;base64,${base64Image}`);
+            })else{
+            setImageSrc(placeholderImage)
+        }
+            .catch((e) => console.error("Image not found to update advertisement", e));
+    }, [props.ad.photosID]);
+
 
     return(
         <div className='pt-20'>
             <div className='border border-gray-300 rounded-[20px] py-5 px-12 flex justify-evenly items-center flex-col'>
-                <img
-                    src={""}
-                    alt='photo'
-                    className='w-40 h-40 object-contain'
+                <img src={imageSrc}
+                     alt="photo"
+                     className="w-52 h-52 object-contain"
                 />
             </div>
             <div className='py-2 px-4'>

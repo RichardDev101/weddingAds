@@ -169,7 +169,7 @@ export default function AdForm() {
             <div className=" min-h-fit p-6 bg-gray-100 flex items-center justify-center">
                 <div className="container max-w-screen-lg mx-auto">
                     <div>
-                        <h2 className="pt-20 font-semibold text-xl text-gray-600">Private Information</h2>
+                        <h2 className="pt-20 font-semibold text-xl text-gray-700">Private Information</h2>
                         <p className="text-gray-500 mb-6">Followoing Information will be stay private and are necessary for our accounting.</p>
 
                         <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
@@ -302,8 +302,8 @@ export default function AdForm() {
             <div className="bg-gray-100 flex items-center justify-center">
                 <div className="container max-w-screen-lg mx-auto">
                     <div>
-                        <h2 className="font-semibold text-xl text-gray-700">Officail Information</h2>
-                        <p className="text-gray-600 mb-6">Followoing information will be seen on your advertisement page.</p>
+                        <h2 className="font-semibold text-xl text-gray-700">Official Information</h2>
+                        <p className="text-gray-600 mb-6">Following information will be seen on your advertisement page.</p>
 
                         <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
                             <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
