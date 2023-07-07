@@ -10,6 +10,10 @@ export default function AdCard(props: AdProps) {
 
     useEffect(()=> {
         axios.get("/api/photo/show/"+props.ad.photosID)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch((e) => console.error("Image not found to update advertisement",e))
     })
 
     return(
