@@ -25,11 +25,11 @@ export default function AdCard(props: AdProps) {
 
 
     return(
-        <div className='pt-10'>
+        <div>
             <div className='border border-gray-300 rounded-[20px] flex justify-evenly items-center flex-col overflow-hidden'>
                 <img src={imageSrc}
                      alt="photo"
-                     className="w-64 h-64 object-cover overflow-hidden"
+                     className="w-64 h-64 object-cover"
                 />
             </div>
             <div className='py-2 px-4'>
