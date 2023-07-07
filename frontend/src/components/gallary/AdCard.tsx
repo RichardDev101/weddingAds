@@ -19,9 +19,7 @@ export default function AdCard(props: AdProps) {
                     )
                 );
                 setImageSrc(`data:image/jpeg;base64,${base64Image}`);
-            })else{
-            setImageSrc(placeholderImage)
-        }
+            })
             .catch((e) => console.error("Image not found to update advertisement", e));
     }, [props.ad.photosID]);
 
