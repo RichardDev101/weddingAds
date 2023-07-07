@@ -7,7 +7,7 @@ type AdProps={
 }
 export default function AdCard(props: AdProps) {
 
-    const [imageSrc, setImageSrc] = useState('');
+    const [imageSrc, setImageSrc] = useState("/images/galleryPlaceholder.png");
 
     useEffect(()=> {
         axios.get("/api/photo/show/" + props.ad.photosID, { responseType: 'arraybuffer' })
@@ -25,11 +25,11 @@ export default function AdCard(props: AdProps) {
 
 
     return(
-        <div className='pt-20'>
-            <div className='border border-gray-300 rounded-[20px] py-5 px-12 flex justify-evenly items-center flex-col'>
+        <div className='pt-10'>
+            <div className='border border-gray-300 rounded-[20px] flex justify-evenly items-center flex-col overflow-hidden'>
                 <img src={imageSrc}
                      alt="photo"
-                     className="w-52 h-52 object-contain"
+                     className="w-64 h-64 object-cover overflow-hidden"
                 />
             </div>
             <div className='py-2 px-4'>
