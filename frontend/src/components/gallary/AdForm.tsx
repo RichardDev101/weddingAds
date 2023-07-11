@@ -123,7 +123,7 @@ export default function AdForm() {
     }
     function updateAdvertisementOnSubmit(){
         const updatedAdvertisement = { ...advertisement };
-        updatedAdvertisement.photosID = [photoId];
+        updatedAdvertisement.photosID = photoId;
 
         axios.put("api/ad/"+advertisement?.id, updatedAdvertisement)
             .then(response => {
