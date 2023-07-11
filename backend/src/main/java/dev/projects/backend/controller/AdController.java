@@ -24,5 +24,4 @@ public class AdController {
         return adService.getAllAds();
     }
 
-
 }

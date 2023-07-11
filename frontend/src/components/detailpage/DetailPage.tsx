@@ -2,9 +2,16 @@ import React from 'react';
 import Container from '../../app/Container';
 import DetailHead from "./DetailHead";
 import DetaiInfo from "./DetaiInfo";
+import {Advertisement} from "../../model/Advertisement";
+import {useParams} from "react-router-dom";
+import axios from "axios";
 
 function DetailPage() {
 
+    const params  = useParams()
+    const id: string|undefined = params.id
+
+    axios("")
 
     return (
         <div className="pt-20 ">

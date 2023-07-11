@@ -3,12 +3,13 @@ import Container from "../../app/Container";
 import {Advertisement} from "../../model/Advertisement";
 import axios from "axios";
 import AdCard from "./AdCard";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 export default function Home() {
 
     const [allAds, setAllAds] = useState<Advertisement[]>([])
     const navigate = useNavigate();
+
 
     useEffect(() => {getAllAds()   }, [])
     function getAllAds() {
