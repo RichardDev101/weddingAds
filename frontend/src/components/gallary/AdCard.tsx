@@ -4,6 +4,7 @@ import axios from "axios";
 
 type AdProps={
     ad: Advertisement,
+    onClick:()=> void;
 }
 export default function AdCard(props: AdProps) {
 
@@ -25,18 +26,18 @@ export default function AdCard(props: AdProps) {
 
 
     return(
-        <div>
+        <div className='cursor-pointer group' onClick={props.onClick}>
             <div className=' border border-gray-300 rounded-[20px] flex justify-evenly items-center flex-col overflow-hidden'>
                 <img src={imageSrc}
                      alt="photo"
-                     className="w-64 h-64 object-cover"
+                     className="w-96 h-64 object-cover"
                 />
             </div>
             <div className='py-2 px-4'>
                 <h1 className='text-black text-[15px]  text-left'>
                     {props.ad.title}
                 </h1>
-                <h2 className='text-black text-[12px] text-left text-gray-500'>
+                <h2 className='text-[12px] text-left text-gray-500'>
                     {props.ad.businessCategories}
                 </h2>
                 <h2 className='text-black text-[12px] text-left'>
