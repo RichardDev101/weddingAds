@@ -35,6 +35,11 @@ public class PhotoController {
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> downloadPhoto(@PathVariable String id){
         Photo photo = photoService.getPhoto(id);
+
+        if (photo == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         Resource resource
                 = new ByteArrayResource(photo.getImage().getData());
         return ResponseEntity.ok()
