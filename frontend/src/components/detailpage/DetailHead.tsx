@@ -3,7 +3,7 @@ import Heading from "../Heading";
 
 type Props ={
     title: string;
-    subtitle:string;
+    subtitle: string;
     imageSrc?: string;
     id:string;
 }
@@ -15,11 +15,15 @@ function DetailHead(props: Props) {
                 title={props.title}
                 subtitle={props.subtitle}/>
             <div className="w-full h-[60vh] overflow-hidden rounded-xl relative">
-                <img
-                    src={props.imageSrc}
-                    className="object-cover w-full"
-                    alt="Image"
-                />
+                {props.imageSrc ? (
+                    <img
+                        src={props.imageSrc}
+                        className="object-cover w-full"
+                        alt="Image"
+                    />
+                ) : (
+                    <div>Loading image...</div>
+                )}
             </div>
         </div>
     );

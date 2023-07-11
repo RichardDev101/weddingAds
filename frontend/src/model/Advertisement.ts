@@ -1,4 +1,3 @@
-import React from 'react';
 import {Company} from "./Company";
 import {PaymentCategory} from "../enum/PaymentCategory";
 import {AdvetisementSatus} from "../enum/AdvetisementSatus";
@@ -22,6 +21,6 @@ export type Advertisement={
     averagePrice: number;
     priceCategories: PriceCategory;
     customerContacts: ContactDetail;
-    locations: Address;
+    locations: Address[];
     personsID: string;
 }

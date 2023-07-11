@@ -1,11 +1,12 @@
 import React from 'react';
 import Avatar from "../Avatar";
+import {BusinessCategory} from "../../enum/BusinessCategory";
 
 type InfoProps={
     selfDescription: string;
     serviceDescription: string;
     coordinates: string;
-    businessCategories: string;
+    businessCategories: BusinessCategory;
 
 }
 function DetaiInfo(props: InfoProps) {

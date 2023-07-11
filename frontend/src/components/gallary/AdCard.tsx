@@ -34,14 +34,14 @@ export default function AdCard(props: AdProps) {
                 />
             </div>
             <div className='py-2 px-4'>
-                <h1 className='text-black text-[15px]  text-left'>
+                <h1 className=' text-[15px] text-black text-left'>
                     {props.ad.title}
                 </h1>
-                <h2 className='text-[12px] text-left text-gray-500'>
+                <h2 className='text-[12px] text-gray-500 text-left'>
                     {props.ad.businessCategories}
                 </h2>
-                <h2 className='text-black text-[12px] text-left'>
-                    {props.ad.locations.city}
+                <h2 className='text-[12px] text-black text-left'>
+                    {props.ad.locations[0].city}
                 </h2>
             </div>
 
