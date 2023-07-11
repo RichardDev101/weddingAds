@@ -12,14 +12,14 @@ export type Advertisement={
     advertisementStatus: AdvetisementSatus,
     paymentCategory: PaymentCategory,
     company: Company,
-    businessCategories: BusinessCategory[],
-    photosID: string[],
+    businessCategories: BusinessCategory,
+    photosID: string,
     title: string,
     aboutYourself: string,
     detailInformationForService: string,
     averagePrice: number
-    priceCategories: PriceCategory[],
-    customerContacts: ContactDetail[],
-    locations:Address[],
+    priceCategories: PriceCategory,
+    customerContacts: ContactDetail,
+    locations:Address,
     personsID: string
 }
