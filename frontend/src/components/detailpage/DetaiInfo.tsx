@@ -1,6 +1,6 @@
 import React from 'react';
-import Avatar from "../Avatar";
 import {BusinessCategory} from "../../enum/BusinessCategory";
+import AvatarLoginImg from "../AvatarLoginImg";
 
 type InfoProps={
     selfDescription: string;
@@ -15,7 +15,7 @@ function DetaiInfo(props: InfoProps) {
             <div className="flex flex-col gap-2">
                 <div className="text-xl font-semibold flex flex-row items-center gap-2">
 
-                    <Avatar/>
+                    <AvatarLoginImg/>
                 </div>
                 <div className=" flex flex-row items-center gap-4 font-light text-neutral-500">
                     <div>
