@@ -13,14 +13,14 @@ export type Advertisement={
     advertisementStatus: AdvetisementSatus;
     paymentCategory: PaymentCategory;
     company: Company;
-    businessCategories: BusinessCategory;
+    businessCategories: BusinessCategory[];
     photosID: string[];
     title: string;
     aboutYourself: string;
     detailInformationForService: string;
     averagePrice: number;
-    priceCategories: PriceCategory;
-    customerContacts: ContactDetail;
+    priceCategories: PriceCategory[];
+    customerContacts: ContactDetail[];
     locations: Address[];
     personsID: string;
 }
