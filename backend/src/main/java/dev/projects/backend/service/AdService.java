@@ -36,10 +36,11 @@ public class AdService {
                 .build();
         return adRepository.save(newAd);
     }
+  
     public List<Advertisement> getAllAds() {
         return adRepository.findAll();
     }
-
+  
     public Advertisement getAdWithId(String id) {
         Optional<Advertisement> optionalAdvertisement = adRepository.findById(id);
         if (optionalAdvertisement.isPresent()) {
@@ -48,6 +49,7 @@ public class AdService {
             throw new NoSuchElementException();
         }
     }
+  
     public Advertisement updateAd(AdvertisementDTO ad, String id) {
         Optional<Advertisement> optionalAdvertisement = adRepository.findById(id);
         if(optionalAdvertisement.isEmpty()){
@@ -72,5 +74,4 @@ public class AdService {
             return adRepository.save(updatedAd);
         }
     }
-
 }
