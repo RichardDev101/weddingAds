@@ -6,7 +6,7 @@ type InfoProps={
     selfDescription: string;
     serviceDescription: string;
     coordinates: string;
-    businessCategories: BusinessCategory;
+    businessCategories: BusinessCategory[];
 
 }
 function DetaiInfo(props: InfoProps) {

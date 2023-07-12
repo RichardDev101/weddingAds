@@ -38,6 +38,7 @@ export default function AdForm() {
 
     const [selectedImage, setSelectedImage]=useState<File | null> (null)
 
+
     let photoId: string = ""
     let advertisement: Advertisement | null =null
 
