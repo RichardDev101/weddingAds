@@ -2,6 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import axios from "axios";
 import {businessCategories} from "../../enum/BusinessCategory";
 import {Advertisement} from "../../model/Advertisement";
+import {useNavigate} from "react-router-dom";
 
 
 export default function AdForm() {
@@ -38,6 +39,7 @@ export default function AdForm() {
 
     const [selectedImage, setSelectedImage]=useState<File | null> (null)
 
+    const navigate = useNavigate();
 
     let photoId: string = ""
     let advertisement: Advertisement | null =null
@@ -131,6 +133,7 @@ export default function AdForm() {
                 console.log(response.data);
                 advertisement=(response.data);
             })
+            .then(()=>navigate("/home"))
             .catch((e) => console.error("Failed to update advertisement",e))
     }
 

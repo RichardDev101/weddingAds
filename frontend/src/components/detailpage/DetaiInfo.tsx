@@ -19,18 +19,20 @@ function DetaiInfo(props: InfoProps) {
                 </div>
                 <div className=" flex flex-row items-center gap-4 font-light text-neutral-500">
                     <div>
-                        Category: {props.businessCategories}
+                        <span style={{ fontWeight: 'bold' }}>Category:</span>
+                        {props.businessCategories}
                     </div>
                 </div>
             </div>
             <hr />
-            <hr />
             <div className="text-lg font-light text-neutral-500">
-                About Yourself: {props.selfDescription}
+                <span style={{ fontWeight: 'bold' }}>About Yourself:</span>
+                {props.selfDescription}
             </div>
             <hr />
             <div className="text-lg font-light text-neutral-500">
-                About Yourself: {props.serviceDescription}
+                <span style={{ fontWeight: 'bold' }}>About Yourself:</span>
+                {props.serviceDescription}
             </div>
             <hr />
 {/*            <Map center={props.coordinates} />*/}
