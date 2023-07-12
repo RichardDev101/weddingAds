@@ -1,6 +1,8 @@
 import React, {ChangeEvent, useState} from 'react';
 import axios from "axios";
 import {businessCategories} from "../../enum/BusinessCategory";
+import {Advertisement} from "../../model/Advertisement";
+
 
 export default function AdForm() {
 
@@ -34,8 +36,15 @@ export default function AdForm() {
     const [shopLocationStateInput, setShopLocationStateInput]=useState<string>("")
     const [shopLocationCountryInput, setShopLocationCountryInput]=useState<string>("")
 
-    function adAdvertisement() {
+    const [selectedImage, setSelectedImage]=useState<File | null> (null)
+
+    let photoId: string = ""
+    let advertisement: Advertisement | null =null
+
+    function adAdvertisementOnSubmit() {
         const advertisementData = {
+            advertisementStatus: "NEW",
+            paymentCategory: "BASIC",
             company: {
                 name: companyNameInput,
                 address: {
@@ -44,8 +53,9 @@ export default function AdForm() {
                     apartment: companyAddressCompartmentInput,
                     zipCode: companyAddressZipCodeInput,
                     city: companyAddressCityInput,
-                    country: companyAddressStateInput,
-                    geoData: companyAddressCountryInput
+                    state: companyAddressStateInput,
+                    country: companyAddressCountryInput,
+                    geoData: ""
                 },
                 contacts: {
                     email: contactsEmailInput,
@@ -56,9 +66,15 @@ export default function AdForm() {
             businessCategories: [
                 businessCategoryInput
             ],
+            photosID: [
+
+            ],
             title: titleInput,
             aboutYourself: aboutYourselfInput,
             detailInformationForService: detailInformationForServiceInput,
+            averagePrice: 0,
+            priceCategories: [
+            ],
             customerContacts: [
                 {
                     email: customerContactsEmailInput,
@@ -72,15 +88,51 @@ export default function AdForm() {
                     houseNo: shopLocationStreetNoInput,
                     zipCode: shopLocationZipCodeInput,
                     city: shopLocationCityInput,
-                    country: shopLocationCountryInput
+                    state:shopLocationStateInput,
+                    country: shopLocationCountryInput,
+                    geoData: ""
                 }
             ]
         };
 
         axios.post("/api/ad", advertisementData)
-            .then(response => console.log(response.data))
-            .catch(error => console.error(error));
+            .then(response => {
+                    console.log(response.data);
+                    advertisement=(response.data);
+                    if (advertisement!=null){
+                    adImageOnSubmit()}
+            })
+            .catch(error => console.error(error))
     }
+
+    const adImageOnSubmit = ()=>{
+        if (selectedImage){
+            const formData = new FormData();
+            formData.append("image", selectedImage);
+
+            axios.post("/api/photo", formData)
+                .then((response)=>{
+                    console.log('Photo added successfully');
+                    photoId=(response.data);
+                    if (photoId!=null){
+                        updateAdvertisementOnSubmit()}
+                })
+                .catch(error => console.error('Failed to add photo:', error));
+        }
+
+    }
+    function updateAdvertisementOnSubmit(){
+        const updatedAdvertisement = { ...advertisement };
+        updatedAdvertisement.photosID = photoId;
+
+        axios.put("api/ad/"+advertisement?.id, updatedAdvertisement)
+            .then(response => {
+                console.log(response.data);
+                advertisement=(response.data);
+            })
+            .catch((e) => console.error("Failed to update advertisement",e))
+    }
+
 
     function companyNameHandler(event: ChangeEvent<HTMLInputElement>){
         setCompanyNameInput(event.target.value)
@@ -146,23 +198,29 @@ export default function AdForm() {
 
     function shopLocationStreetNameHandler(event: ChangeEvent<HTMLInputElement>){
         setShopLocationStreetNameInput(event.target.value)
-    };
+    }
     function shopLocationStreetNoHandler(event: ChangeEvent<HTMLInputElement>){
         setShopLocationStreetNoInput(event.target.value)
-    };
+    }
     function shopLocationZipCodeHandler(event: ChangeEvent<HTMLInputElement>) {
         setShopLocationZipCodeInput(event.target.value)
-    };
+    }
     function shopLocationCityHandler(event: ChangeEvent<HTMLInputElement>) {
         setShopLocationCityInput(event.target.value)
-    };
+    }
     function shopLocationStateHandler(event: ChangeEvent<HTMLInputElement>) {
         setShopLocationStateInput(event.target.value)
-    };
+    }
     function shopLocationCountryHandler(event: ChangeEvent<HTMLInputElement>) {
         setShopLocationCountryInput(event.target.value)
-    };
+    }
 
+    function imageUploadHandler (event: React.ChangeEvent<HTMLInputElement>) {
+        const file = event.target.files?.[0];
+        if (file) {
+            setSelectedImage(file);
+        }
+    }
 
     return (
         <>
@@ -373,14 +431,26 @@ export default function AdForm() {
                                                         <svg aria-hidden="true"
                                                              className="w-10 h-10 mb-3 text-gray-400" fill="none"
                                                              stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                                                   d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                                                         </svg>
                                                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or
                                                             drag and drop</p>
                                                         <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                                                        {selectedImage && (
+                                                            <div className="flex items-center justify-center">
+                                                                <img
+                                                                    src={URL.createObjectURL(selectedImage)}
+                                                                    alt="Selected Image"
+                                                                    className="max-w-auto max-h-32"
+                                                                />
+                                                            </div>
+                                                        )}
                                                     </div>
-                                                    <input id="dropzone-file" type="file" className="hidden"/>
+                                                    <input  id="dropzone-file" type="file" className="hidden"
+                                                            onChange={imageUploadHandler}
+                                                    />
+
                                                 </label>
                                             </div>
                                         </div>
@@ -533,7 +603,7 @@ export default function AdForm() {
                                         </div>
 
                                         <button type="submit"
-                                                onClick={adAdvertisement}
+                                                onClick={adAdvertisementOnSubmit}
                                                 className="md:col-span-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit
                                         </button>
 

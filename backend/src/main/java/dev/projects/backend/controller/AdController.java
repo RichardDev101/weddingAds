@@ -23,8 +23,14 @@ public class AdController {
     public List<Advertisement> getAllAds(){
         return adService.getAllAds();
     }
-    @GetMapping("/{id}")
+
+    @GetMapping("{id}")
     public Advertisement getAdWithId(@PathVariable String id){
         return adService.getAdWithId(id);
+    }
+
+    @PutMapping("{id}")
+    public Advertisement update(@RequestBody AdvertisementDTO ad, @PathVariable String id){
+        return adService.updateAd(ad, id);
     }
 }

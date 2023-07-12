@@ -10,13 +10,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import java.io.IOException;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -28,25 +29,46 @@ class PhotoControllerTest {
     @MockBean
     private PhotoService photoService;
 
-/*
     @Test
-    public void testAddPhoto() throws Exception {
-        MockMultipartFile file = new MockMultipartFile(
-                "image",
-                "test.jpg",
-                MediaType.IMAGE_JPEG_VALUE,
-                "Test data".getBytes()
-        );
+    @DirtiesContext
+    void testAddPhoto_Success() throws Exception {
+        MockMultipartFile image = new MockMultipartFile("image", "test.jpg", MediaType.IMAGE_JPEG_VALUE, "Test data".getBytes());
 
-        when(photoService.addPhoto(anyString(), any(MockMultipartFile.class).thenReturn("photoId123"));
+        String fileId = "fileId123";
+        when(photoService.addPhoto(image.getOriginalFilename(), image)).thenReturn(fileId);
 
         mockMvc.perform(multipart("/api/photo")
-                        .file(file))
+                        .file(image))
                 .andExpect(status().isOk())
-                .andExpect(content().string("photoId123"));
+                .andExpect(content().string(fileId));
 
-        verify(photoService).addPhoto(anyString(), any(MockMultipartFile.class));
-    }*/
+        verify(photoService).addPhoto(image.getOriginalFilename(), image);
+    }
+    @Test
+    @DirtiesContext
+    void testAddPhoto_Failure() throws Exception {
+        MockMultipartFile image = new MockMultipartFile("image", "test.jpg", MediaType.IMAGE_JPEG_VALUE, "Test data".getBytes());
+
+        doThrow(new IOException()).when(photoService).addPhoto(image.getOriginalFilename(), image);
+
+        mockMvc.perform(multipart("/api/photo")
+                        .file(image))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().string("Failed to add photo"));
+
+        verify(photoService).addPhoto(image.getOriginalFilename(), image);
+    }
+
+    @Test
+    void testDownloadPhoto_NotFound() throws Exception {
+        when(photoService.getPhoto("photoId123")).thenReturn(null);
+
+        mockMvc.perform(get("/api/photo/download/{id}", "photoId123"))
+                .andExpect(status().isNotFound());
+
+        verify(photoService).getPhoto("photoId123");
+    }
+
     @Test
     @DirtiesContext
     void testDownloadPhoto() throws Exception {

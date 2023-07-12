@@ -22,12 +22,24 @@ public class PhotoController {
     private final PhotoService photoService;
 
     @PostMapping
-    public String addPhoto(@RequestParam("image") MultipartFile  image) throws IOException {
-       return photoService.addPhoto(image.getOriginalFilename(),image);
+    public ResponseEntity<String> addPhoto(@RequestParam("image") MultipartFile  image) throws IOException {
+        try {
+            String fileId = photoService.addPhoto(image.getOriginalFilename(), image);
+            return ResponseEntity
+                    .ok()
+                    .body(fileId);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to add photo");
+        }
     }
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> downloadPhoto(@PathVariable String id){
         Photo photo = photoService.getPhoto(id);
+
+        if (photo == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         Resource resource
                 = new ByteArrayResource(photo.getImage().getData());
         return ResponseEntity.ok()

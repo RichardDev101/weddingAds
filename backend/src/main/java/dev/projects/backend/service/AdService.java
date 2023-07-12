@@ -36,15 +36,42 @@ public class AdService {
                 .build();
         return adRepository.save(newAd);
     }
+  
     public List<Advertisement> getAllAds() {
         return adRepository.findAll();
     }
+  
     public Advertisement getAdWithId(String id) {
         Optional<Advertisement> optionalAdvertisement = adRepository.findById(id);
         if (optionalAdvertisement.isPresent()) {
             return optionalAdvertisement.get();
         } else {
             throw new NoSuchElementException();
+        }
+    }
+  
+    public Advertisement updateAd(AdvertisementDTO ad, String id) {
+        Optional<Advertisement> optionalAdvertisement = adRepository.findById(id);
+        if(optionalAdvertisement.isEmpty()){
+            throw new NoSuchElementException();
+        }else {
+            Advertisement updatedAd = Advertisement.builder()
+                    .id(id)
+                    .advertisementStatus(ad.getAdvertisementStatus())
+                    .paymentCategory(ad.getPaymentCategory())
+                    .company(ad.getCompany())
+                    .businessCategories(ad.getBusinessCategories())
+                    .photosID(ad.getPhotosID())
+                    .title(ad.getTitle())
+                    .aboutYourself(ad.getAboutYourself())
+                    .detailInformationForService(ad.getDetailInformationForService())
+                    .averagePrice(ad.getAveragePrice())
+                    .priceCategories(ad.getPriceCategories())
+                    .customerContacts(ad.getCustomerContacts())
+                    .locations(ad.getLocations())
+                    .personsID(ad.getPersonsID())
+                    .build();
+            return adRepository.save(updatedAd);
         }
     }
 }
