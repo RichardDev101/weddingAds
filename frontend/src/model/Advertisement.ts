@@ -14,7 +14,7 @@ export type Advertisement={
     paymentCategory: PaymentCategory;
     company: Company;
     businessCategories: BusinessCategory;
-    photosID: string;
+    photosID: string[];
     title: string;
     aboutYourself: string;
     detailInformationForService: string;
