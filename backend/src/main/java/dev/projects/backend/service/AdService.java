@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -37,5 +39,12 @@ public class AdService {
     public List<Advertisement> getAllAds() {
         return adRepository.findAll();
     }
-
+    public Advertisement getAdWithId(String id) {
+        Optional<Advertisement> optionalAdvertisement = adRepository.findById(id);
+        if (optionalAdvertisement.isPresent()) {
+            return optionalAdvertisement.get();
+        } else {
+            throw new NoSuchElementException();
+        }
+    }
 }

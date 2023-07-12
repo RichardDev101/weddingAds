@@ -23,6 +23,8 @@ public class AdController {
     public List<Advertisement> getAllAds(){
         return adService.getAllAds();
     }
-
-
+    @GetMapping("/{id}")
+    public Advertisement getAdWithId(@PathVariable String id){
+        return adService.getAdWithId(id);
+    }
 }
